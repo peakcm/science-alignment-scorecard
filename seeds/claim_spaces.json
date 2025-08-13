@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "type": "claim_space",
+      "id": "bf396bbc-3145-4c44-87f2-bc9755b53e4d",
+      "attributes": {
+        "name": "Autism Causation Claim",
+        "measurement_type": "categorical",
+        "states": [
+          {
+            "id": "causal",
+            "label": "Causal link exists",
+            "definition": "Asserts vaccines/ingredients cause autism",
+            "polarity": "counter",
+            "order": 0
+          },
+          {
+            "id": "no_link",
+            "label": "No causal link",
+            "definition": "States vaccines/ingredients do not cause autism",
+            "polarity": "consensus",
+            "order": 1
+          },
+          {
+            "id": "uncertain",
+            "label": "Uncertain/agnostic",
+            "definition": "Expresses uncertainty or 'needs more study'",
+            "polarity": "neutral",
+            "order": 2
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ScoreSnapshot",
+  "type": "object",
+  "required": [
+    "id",
+    "candidate_id",
+    "topic_id",
+    "as_of",
+    "alignment_score",
+    "ci_low",
+    "ci_high",
+    "overlap_metric",
+    "waffling_score",
+    "waffling_window_days",
+    "method_version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "topic_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "alignment_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "ci_low": {
+      "type": "number"
+    },
+    "ci_high": {
+      "type": "number"
+    },
+    "overlap_metric": {
+      "type": "string"
+    },
+    "distance_metrics": {
+      "type": "object"
+    },
+    "consensus_clarity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "data_sufficiency_flag": {
+      "type": "boolean"
+    },
+    "waffling_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "waffling_window_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "method_version": {
+      "type": "string"
+    },
+    "inputs_hash": {
+      "type": "string"
+    }
+  }
+}

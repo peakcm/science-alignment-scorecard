@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "type": "stance_estimate",
+      "id": "7d0509a9-2ca5-4b1b-9a4c-b0e0aa67278b",
+      "attributes": {
+        "candidate_id": "cand-a",
+        "topic_id": "32d59757-908b-44ec-ba33-155f317ec156",
+        "window_start": "2024-06-01",
+        "window_end": "2025-06-01",
+        "dirichlet_beta": [
+          0.5,
+          2.8,
+          0.7
+        ],
+        "probabilities": [
+          0.12,
+          0.7,
+          0.18
+        ],
+        "effective_sample_size": 4.0,
+        "n_units": 7,
+        "data_sufficiency": "adequate",
+        "method_version": "stance-v1.1"
+      },
+      "relationships": {
+        "candidate": {
+          "data": {
+            "type": "candidate",
+            "id": "cand-a"
+          }
+        },
+        "topic": {
+          "data": {
+            "type": "topic",
+            "id": "32d59757-908b-44ec-ba33-155f317ec156"
+          }
+        }
+      }
+    },
+    {
+      "type": "stance_estimate",
+      "id": "9420b00c-b793-4722-bde4-0b6b3ca301a6",
+      "attributes": {
+        "candidate_id": "cand-b",
+        "topic_id": "32d59757-908b-44ec-ba33-155f317ec156",
+        "window_start": "2024-06-01",
+        "window_end": "2025-06-01",
+        "dirichlet_beta": [
+          1.2,
+          1.0,
+          1.0
+        ],
+        "probabilities": [
+          0.4,
+          0.33,
+          0.27
+        ],
+        "effective_sample_size": 3.2,
+        "n_units": 5,
+        "data_sufficiency": "low",
+        "method_version": "stance-v1.1"
+      },
+      "relationships": {
+        "candidate": {
+          "data": {
+            "type": "candidate",
+            "id": "cand-b"
+          }
+        },
+        "topic": {
+          "data": {
+            "type": "topic",
+            "id": "32d59757-908b-44ec-ba33-155f317ec156"
+          }
+        }
+      }
+    }
+  ]
+}

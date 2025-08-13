@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ClaimSpace",
+  "type": "object",
+  "required": [
+    "id",
+    "topic_id",
+    "name",
+    "states",
+    "measurement_type"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "topic_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "measurement_type": {
+      "type": "string",
+      "enum": [
+        "categorical",
+        "ordinal"
+      ]
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          },
+          "polarity": {
+            "type": "string",
+            "enum": [
+              "consensus",
+              "counter",
+              "neutral"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "type": "candidate",
+      "id": "cand-a",
+      "attributes": {
+        "name": "Candidate A",
+        "role": "presidential_candidate",
+        "cycle": "2024"
+      }
+    },
+    {
+      "type": "candidate",
+      "id": "cand-b",
+      "attributes": {
+        "name": "Candidate B",
+        "role": "presidential_candidate",
+        "cycle": "2024"
+      }
+    }
+  ]
+}
