@@ -34,30 +34,10 @@ uvicorn app:app --reload --port 5056
 ```
 
 ## View the static demo
-Just open:
-- `web/demo/index.html` (bar charts, embedded seeds)
-- `web/demo/likert.html` (Likert axis, per-statement points, KDE, consensus prior)
+Default:
+- `web/demo/index.html` (**Likert tabs**: 2 statements, 50+ mock points per candidate, filters, KDE, consensus prior)
 
-## Deploy to GitHub Pages
-1. Create a new, empty GitHub repo and push (see commands below).
-2. In repo settings → **Pages**, set **Source: GitHub Actions**.
-3. Push to `main` — the workflow will publish `web/demo`.
-
-## Create & push the repo
-```bash
-# from inside this folder after unzipping
-git init
-git add .
-git commit -m "Initial commit: Science Index prototype"
-# Option A: using GitHub CLI
-gh repo create <your-org-or-user>/science-index --public --source=. --remote=origin --push
-# Option B: manual
-git branch -M main
-git remote add origin git@github.com:<your-org-or-user>/science-index.git
-git push -u origin main
-```
-
-## Notes
-- JSON:API media type: `application/vnd.api+json`
-- Seeds are demo-only; swap with ETL outputs when ready.
-- MIT licensed.
+Additional:
+- `web/demo/bar.html` (legacy bar charts)
+- `web/demo/likert.html` (single-statement Likert + KDE)
+- `web/demo/likert-tabs.html` (same as index)
