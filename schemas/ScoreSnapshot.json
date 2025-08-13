@@ -35,7 +35,8 @@
     "alignment_score": {
       "type": "number",
       "minimum": 0,
-      "maximum": 100
+      "maximum": 100,
+      "description": "100\u00d7\u222bmin(prior, stance) dx on common grid"
     },
     "ci_low": {
       "type": "number"
@@ -44,10 +45,26 @@
       "type": "number"
     },
     "overlap_metric": {
-      "type": "string"
+      "type": "string",
+      "enum": [
+        "overlap",
+        "1_minus_TVD"
+      ]
     },
     "distance_metrics": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "js_divergence": {
+          "type": "number"
+        },
+        "hellinger": {
+          "type": "number"
+        },
+        "wasserstein_1": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
     },
     "consensus_clarity": {
       "type": "number",
@@ -55,22 +72,32 @@
       "maximum": 1
     },
     "data_sufficiency_flag": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "waffling_score": {
       "type": "number",
       "minimum": 0,
-      "maximum": 100
+      "maximum": 100,
+      "description": "Temporal volatility + contradiction penalty"
     },
     "waffling_window_days": {
       "type": "integer",
       "minimum": 1
+    },
+    "notes": {
+      "type": "string"
     },
     "method_version": {
       "type": "string"
     },
     "inputs_hash": {
       "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
     }
-  }
+  },
+  "additionalProperties": false
 }
