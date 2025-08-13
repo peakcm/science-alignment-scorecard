@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Science Index — Likert Tabs Prototype</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="max-w-7xl mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold">Science Index <span class="text-slate-500">— Likert Tabs Prototype</span></h1>
+    <p class="text-sm text-slate-600 mt-1">Likert axis: −2 “Strongly disagree” → 0 “Uncertain” → +2 “Strongly agree”.</p>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 space-y-6">
+    <!-- Tabs for statements -->
+    <section class="bg-white rounded-2xl shadow p-4">
+      <div class="flex flex-wrap gap-2">
+        <button data-topic="autism" class="tab-btn px-3 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold">“Vaccines cause autism.”</button>
+        <button data-topic="mandates" class="tab-btn px-3 py-2 rounded-md bg-slate-100 text-slate-800 text-sm font-semibold">“School-entry immunization requirements increase coverage.”</button>
+      </div>
+    </section>
+
+    <!-- Topic & Consensus -->
+    <section class="bg-white rounded-2xl shadow p-5">
+      <div class="flex flex-col md:flex-row items-start justify-between gap-6">
+        <div class="flex-1">
+          <h2 id="topicTitle" class="text-2xl font-semibold"></h2>
+          <p id="topicDesc" class="text-sm text-slate-600 mt-1"></p>
+          <div class="mt-2 space-x-2">
+            <span class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-800">Domain: Health</span>
+            <span id="clarityBadge" class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">Consensus clarity: —</span>
+          </div>
+        </div>
+        <div class="w-full md:w-[520px]">
+          <canvas id="priorChart" height="180"></canvas>
+          <p class="text-[11px] text-slate-500 text-center mt-1">Scientific consensus prior (smoothed density)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls & Candidates -->
+    <section class="bg-white rounded-2xl shadow p-5">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">Candidate</label>
+          <select id="candidateSelect" class="mt-1 border rounded-md px-2 py-1 text-sm w-full"></select>
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">Audience</label>
+          <select id="audienceSelect" class="mt-1 border rounded-md px-2 py-1 text-sm w-full">
+            <option value="all">All</option>
+            <option>official_record</option>
+            <option>national_media</option>
+            <option>local_media</option>
+            <option>party_base</option>
+            <option>general_public</option>
+            <option>online_followers</option>
+          </select>
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">Source type</label>
+          <select id="sourceSelect" class="mt-1 border rounded-md px-2 py-1 text-sm w-full">
+            <option value="all">All</option>
+            <option>roll_call_vote</option>
+            <option>executive_action</option>
+            <option>policy_doc</option>
+            <option>prepared_speech</option>
+            <option>interview</option>
+            <option>debate</option>
+            <option>rally_remark</option>
+            <option>social_post</option>
+            <option>press_release</option>
+          </select>
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">Bandwidth</label>
+          <div class="flex items-center gap-2">
+            <input id="bandwidth" type="range" min="0.15" max="0.8" step="0.05" value="0.35" class="w-full">
+            <span id="bwLabel" class="text-xs text-slate-600 w-10 text-right">0.35</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">From</label>
+          <input id="dateFrom" type="date" class="mt-1 border rounded-md px-2 py-1 text-sm w-full">
+        </div>
+        <div class="md:col-span-3">
+          <label class="block text-sm font-medium">To</label>
+          <input id="dateTo" type="date" class="mt-1 border rounded-md px-2 py-1 text-sm w-full">
+        </div>
+        <div class="md:col-span-3">
+          <button id="applyFilters" class="mt-6 w-full px-3 py-2 rounded-md bg-slate-900 text-white text-sm font-semibold">Apply filters</button>
+        </div>
+      </div>
+
+      <div id="candidateGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6"></div>
+    </section>
+
+    <!-- Evidence table -->
+    <section class="bg-white rounded-2xl shadow p-5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-semibold">Evidence explorer</h3>
+        <div class="text-xs text-slate-600">Showing filtered statements for the selected topic.</div>
+      </div>
+      <div class="overflow-x-auto mt-3">
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr class="text-left border-b">
+              <th class="py-2 pr-4">Date</th>
+              <th class="py-2 pr-4">Candidate</th>
+              <th class="py-2 pr-4">Source</th>
+              <th class="py-2 pr-4">Audience</th>
+              <th class="py-2 pr-4">Excerpt</th>
+              <th class="py-2 pr-4">Likert</th>
+              <th class="py-2">Weight</th>
+            </tr>
+          </thead>
+          <tbody id="evidenceBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-7xl mx-auto px-4 py-8 text-xs text-slate-500">
+    <p>Overlap = Σ min(p_consensus, p_stance). Likert: −2 (Strongly disagree) … 0 (Uncertain) … +2 (Strongly agree).</p>
+  </footer>
+
+<script>
+// ---------------- Topics & priors ----------------
+const TOPICS = {
+  autism: {
+    title: "Statement: “Vaccines cause autism.”",
+    desc: "We score agreement with this statement. Scientific consensus rejects a causal link.",
+    // alpha order: [counter-to-statement?, consensus?, uncertain]
+    // Here, alpha is [causal, no_link, uncertain] -> centers [+2, -2, 0]
+    priorAlpha: [1, 700, 3],
+    clarity: 0.96,
+    centers: [2, -2, 0],
+    centerNames: ["Causal", "No link", "Uncertain"]
+  },
+  mandates: {
+    title: "Statement: “School-entry immunization requirements increase coverage.”",
+    desc: "We score agreement with this statement. Scientific consensus generally supports a positive effect on coverage.",
+    // For mandates, consensus = agree (+2). Order: [counter, consensus, uncertain] -> centers [-2, +2, 0]
+    priorAlpha: [10, 200, 20],
+    clarity: 0.88,
+    centers: [-2, 2, 0],
+    centerNames: ["Counter", "Supports", "Uncertain"]
+  }
+};
+
+// ---------------- Candidates ----------------
+const CANDIDATES = [
+  { id:"cand-a", name:"Candidate A", cycle:"2024" },
+  { id:"cand-b", name:"Candidate B", cycle:"2024" }
+];
+
+// ---------------- Utilities ----------------
+const LIKERT_MIN = -2, LIKERT_MAX = 2;
+function normalizeAlpha(alpha){ const s=alpha.reduce((a,b)=>a+b,0); return alpha.map(v=>v/s); }
+function gaussian(x,h){ const z=x/h; return Math.exp(-0.5*z*z)/(Math.sqrt(2*Math.PI)*h); }
+function grid(n=301){ const xs=[]; for(let i=0;i<n;i++){ xs.push(LIKERT_MIN + i*(LIKERT_MAX-LIKERT_MIN)/(n-1)); } return xs; }
+function normalizeDensity(xs, ys){
+  const dx=(LIKERT_MAX-LIKERT_MIN)/(xs.length-1);
+  const area=ys.reduce((a,b)=>a+b,0)*dx;
+  return area>0 ? ys.map(y=>y/area) : ys;
+}
+function priorDensity(xs, alpha, centers, h=0.35){
+  const p=normalizeAlpha(alpha);
+  const ys = xs.map(x => p.reduce((acc, pi, i)=> acc + pi*gaussian(x-centers[i], h), 0));
+  return normalizeDensity(xs, ys);
+}
+function overlap(p, q){ return 100 * p.map((pi,i)=>Math.min(pi, q[i])).reduce((a,b)=>a+b,0); }
+function badgeColor(val){ if(val>=85) return 'bg-emerald-100 text-emerald-800'; if(val>=60) return 'bg-amber-100 text-amber-800'; return 'bg-rose-100 text-rose-800'; }
+function fmtDate(d){ return d.toISOString().slice(0,10); }
+function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+function rng(seed){ // simple deterministic RNG for reproducibility
+  let s=seed;
+  return () => { s = (s*1664525 + 1013904223) % 4294967296; return s/4294967296; };
+}
+function pick(r, arr){ return arr[Math.floor(r()*arr.length)]; }
+
+// Map continuous x to a label for the table
+function likertLabel(x){
+  if(x<=-1.5) return "Strongly disagree";
+  if(x<-0.5) return "Disagree";
+  if(x<0.5) return "Uncertain";
+  if(x<1.5) return "Agree";
+  return "Strongly agree";
+}
+
+// ---------------- Mock data generation ----------------
+const AUDIENCES = ["official_record","national_media","local_media","party_base","general_public","online_followers"];
+const SOURCES = ["roll_call_vote","executive_action","policy_doc","prepared_speech","interview","debate","rally_remark","social_post","press_release"];
+
+function weightFor(source){
+  switch(source){
+    case "roll_call_vote": return 1.0;
+    case "executive_action": return 0.9;
+    case "policy_doc": return 0.8;
+    case "prepared_speech": return 0.65;
+    case "interview": return 0.6;
+    case "debate": return 0.55;
+    case "press_release": return 0.5;
+    case "rally_remark": return 0.4;
+    case "social_post": return 0.25;
+    default: return 0.3;
+  }
+}
+
+// Generate ~52 points per candidate per topic across 4 years with a trend for Candidate B on 'autism'
+function generateMockEvidence(){
+  const data = { autism: [], mandates: [] };
+  const start = new Date(); start.setFullYear(start.getFullYear()-4);
+  const end = new Date();
+  const N = 52; // ~weekly per month-ish
+
+  const rand = rng(12345);
+
+  CANDIDATES.forEach(c => {
+    // AUTISM
+    for(let i=0;i<N;i++){
+      const t = i/(N-1); // 0..1 across 4 years
+      const date = new Date(start.getTime() + t*(end - start));
+      const audience = pick(rand, AUDIENCES);
+      const source = pick(rand, SOURCES);
+      const baseW = weightFor(source);
+
+      let x; // Likert coordinate
+      if(c.id === "cand-b"){
+        // Trend: starts closer to +2 (agree with "vaccines cause autism"), shifts toward -2 over time
+        const center = 2 - 4*t; // +2 -> -2 linearly
+        const noise = (rand()-0.5)*0.8; // spread
+        x = clamp(center + noise, -2, 2);
+      } else {
+        // Candidate A: generally disagrees (-2 to -1), occasional uncertainty
+        const center = -1.6 + (rand()-0.5)*0.4;
+        const mix = rand();
+        x = mix < 0.85 ? clamp(center + (rand()-0.5)*0.5, -2, 2)
+                       : clamp((rand()-0.5)*0.8, -2, 2); // sometimes near 0
+      }
+
+      const text = ( () => {
+        const l = likertLabel(x);
+        if(l.startsWith("Strongly disagree") || l==="Disagree") return "Vaccines do not cause autism.";
+        if(l==="Uncertain") return "We need more research on autism and vaccines.";
+        return "Some vaccines may be linked to autism.";
+      })();
+
+      data.autism.push({
+        candidate_id: c.id,
+        date: fmtDate(date),
+        source_type: source,
+        audience_type: audience,
+        venue: "Mock",
+        extracted_text: text,
+        x: x,
+        effective_weight: +(baseW * (0.9 + 0.2*rand())).toFixed(2)
+      });
+    }
+
+    // MANDATES
+    for(let i=0;i<N;i++){
+      const t = i/(N-1);
+      const date = new Date(start.getTime() + t*(end - start));
+      const audience = pick(rand, AUDIENCES);
+      const source = pick(rand, SOURCES);
+      const baseW = weightFor(source);
+
+      let x;
+      if(c.id === "cand-b"){
+        // Mild drift from Uncertain to Agree over time for mandates
+        const center = -0.2 + 1.6*t; // starts near 0-, ends near +1.4
+        const noise = (rand()-0.5)*0.7;
+        x = clamp(center + noise, -2, 2);
+      } else {
+        // Candidate A broadly agrees mandates increase coverage
+        const center = 1.4 + (rand()-0.5)*0.3;
+        x = clamp(center + (rand()-0.5)*0.5, -2, 2);
+      }
+
+      const text = ( () => {
+        const l = likertLabel(x);
+        if(l.startsWith("Strongly agree") || l==="Agree") return "School-entry immunization requirements raise coverage.";
+        if(l==="Uncertain") return "Mandates may help, but evidence is mixed.";
+        return "Mandates do not increase coverage or may harm uptake.";
+      })();
+
+      data.mandates.push({
+        candidate_id: c.id,
+        date: fmtDate(date),
+        source_type: source,
+        audience_type: audience,
+        venue: "Mock",
+        extracted_text: text,
+        x: x,
+        effective_weight: +(baseW * (0.9 + 0.2*rand())).toFixed(2)
+      });
+    }
+  });
+
+  return data;
+}
+
+const MOCK = generateMockEvidence();
+
+// ---------------- Rendering ----------------
+let currentTopic = "autism";
+let charts = { prior: null, cand: {} };
+
+const topicTitle = document.getElementById("topicTitle");
+const topicDesc = document.getElementById("topicDesc");
+const clarityBadge = document.getElementById("clarityBadge");
+const priorCtx = document.getElementById("priorChart").getContext("2d");
+
+const candidateSelect = document.getElementById("candidateSelect");
+const audienceSelect = document.getElementById("audienceSelect");
+const sourceSelect = document.getElementById("sourceSelect");
+const dateFromInput = document.getElementById("dateFrom");
+const dateToInput = document.getElementById("dateTo");
+const applyFiltersBtn = document.getElementById("applyFilters");
+const bwSlider = document.getElementById("bandwidth");
+const bwLabel = document.getElementById("bwLabel");
+const candidateGrid = document.getElementById("candidateGrid");
+const evidenceBody = document.getElementById("evidenceBody");
+
+bwSlider.addEventListener('input', () => { bwLabel.textContent = (+bwSlider.value).toFixed(2); });
+bwLabel.textContent = (+bwSlider.value).toFixed(2);
+
+// Populate candidate selector
+(function initSelectors(){
+  const all = document.createElement('option'); all.value="all"; all.textContent="All candidates";
+  candidateSelect.appendChild(all);
+  CANDIDATES.forEach(c => {
+    const opt = document.createElement('option'); opt.value = c.id; opt.textContent = c.name;
+    candidateSelect.appendChild(opt);
+  });
+  candidateSelect.value = "all";
+})();
+
+// Tab switching
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("bg-indigo-600","text-white"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.add("bg-slate-100","text-slate-800"));
+    btn.classList.remove("bg-slate-100","text-slate-800");
+    btn.classList.add("bg-indigo-600","text-white");
+    currentTopic = btn.dataset.topic;
+    renderAll();
+  });
+});
+
+function getFilteredEvidence(topicKey){
+  const arr = MOCK[topicKey].slice();
+  const cand = candidateSelect.value;
+  const aud = audienceSelect.value;
+  const src = sourceSelect.value;
+  const dFrom = dateFromInput.value ? new Date(dateFromInput.value) : null;
+  const dTo = dateToInput.value ? new Date(dateToInput.value) : null;
+
+  return arr.filter(e => {
+    if(cand !== "all" && e.candidate_id !== cand) return false;
+    if(aud !== "all" && e.audience_type !== aud) return false;
+    if(src !== "all" && e.source_type !== src) return false;
+    const d = new Date(e.date);
+    if(dFrom && d < dFrom) return false;
+    if(dTo && d > dTo) return false;
+    return true;
+  });
+}
+
+applyFiltersBtn.addEventListener("click", () => renderAll());
+
+function renderTopicHeader(){
+  const T = TOPICS[currentTopic];
+  topicTitle.textContent = T.title;
+  topicDesc.textContent = T.desc;
+  clarityBadge.textContent = `Consensus clarity: ${(T.clarity*100).toFixed(0)}%`;
+}
+
+function renderPrior(){
+  const T = TOPICS[currentTopic];
+  const xs = grid();
+  const ys = priorDensity(xs, T.priorAlpha, T.centers, +bwSlider.value);
+
+  if(charts.prior) charts.prior.destroy();
+  charts.prior = new Chart(priorCtx, {
+    type: 'line',
+    data: { labels: xs, datasets: [{ label: "Scientific consensus (prior)", data: ys, fill: true, pointRadius: 0, tension: 0.25 }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx)=> `Density: ${ctx.parsed.y.toFixed(3)}` } } },
+      scales: {
+        x: {
+          type: 'linear', min: -2, max: 2, ticks: {
+            stepSize: 1,
+            callback: (val)=> ({'-2':"Strongly disagree",'-1':"Disagree",'0':"Uncertain",'1':"Agree",'2':"Strongly agree"})[val] || ""
+          }
+        },
+        y: { title: { display: true, text: "Density" }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function renderCandidates(){
+  // destroy old charts
+  Object.values(charts.cand).forEach(ch => ch.destroy());
+  charts.cand = {};
+
+  candidateGrid.innerHTML = '';
+  const list = candidateSelect.value === "all" ? CANDIDATES : CANDIDATES.filter(c => c.id === candidateSelect.value);
+  const xs = grid();
+  const T = TOPICS[currentTopic];
+  const priorYs = priorDensity(xs, T.priorAlpha, T.centers, +bwSlider.value);
+
+  list.forEach(c => {
+    const ev = getFilteredEvidence(currentTopic).filter(e => e.candidate_id === c.id);
+    // stance probabilities for overlap (3-bucket projection around -2, 0, +2)
+    const buckets = [0,0,0];
+    const centers = [-2, 0, 2];
+    ev.forEach(e => {
+      const d = centers.map(cc => Math.abs(e.x-cc));
+      const k = d.indexOf(Math.min(...d));
+      buckets[k] += e.effective_weight || 0.2;
+    });
+    const sumB = buckets.reduce((a,b)=>a+b,0) || 1;
+    const stanceP = buckets.map(b => b/sumB);
+    // Prior projected to same buckets
+    const priorP = normalizeAlpha(T.priorAlpha); // matches T.centers order
+
+    // Compute overlap; but ensure centers order alignment
+    // For autism, priorP order corresponds to centers [2,-2,0]; we need to map to [-2,0,2]
+    let priorP_remap = [0,0,0];
+    if(currentTopic === "autism"){
+      // alpha order [causal(+2), no_link(-2), uncertain(0)]
+      // map to [-2,0,2] => [no_link, uncertain, causal] => indices [1,2,0]
+      priorP_remap = [priorP[1], priorP[2], priorP[0]];
+    } else {
+      // mandates alpha order [counter(-2), consensus(+2), uncertain(0)] -> [-2,0,2] => [counter, uncertain, consensus] => indices [0,2,1]
+      priorP_remap = [priorP[0], priorP[2], priorP[1]];
+    }
+    const align = overlap(priorP_remap, stanceP);
+
+    const waffling = (()=>{
+      // crude: std dev of e.x in windows
+      if(ev.length < 3) return 0;
+      const xsrt = ev.slice().sort((a,b)=> a.date.localeCompare(b.date));
+      const window = Math.max(3, Math.floor(xsrt.length/6));
+      let changes = 0, comps = 0;
+      for(let i=0;i+window<xsrt.length;i+=window){
+        const a = xsrt.slice(i, i+window).reduce((s,v)=>s+v.x,0)/window;
+        const b = xsrt.slice(i+1, i+1+window).reduce((s,v)=>s+v.x,0)/window;
+        changes += Math.abs(a-b);
+        comps++;
+      }
+      return Math.min(100, (changes/(comps||1))*50);
+    })();
+
+    const card = `
+      <div class="border rounded-2xl p-4 bg-white">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h4 class="text-lg font-semibold">${c.name}</h4>
+            <div class="mt-1 space-x-2">
+              <span class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full ${badgeColor(align)}">Alignment: ${align.toFixed(1)}%</span>
+              <span class="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-slate-100 text-slate-800">Waffling: ${waffling.toFixed(0)}</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Filtered statements: ${ev.length}</p>
+          </div>
+          <div class="w-full md:w-[520px]">
+            <canvas id="chart-${c.id}" height="190"></canvas>
+            <p class="text-[11px] text-slate-500 text-center mt-1">Density (line), statements (points), prior (dashed)</p>
+          </div>
+        </div>
+      </div>`;
+    candidateGrid.insertAdjacentHTML('beforeend', card);
+
+    // KDE of filtered points
+    const h = +bwSlider.value;
+    const ys = (function(){
+      if(ev.length === 0) return xs.map(()=>0);
+      // weight each point by effective_weight
+      return normalizeDensity(xs, xs.map(xi => ev.reduce((acc, e) => acc + (e.effective_weight||0.2)*gaussian(xi - e.x, h), 0)));
+    })();
+    const scatter = ev.map(e => ({ x: e.x, y: 0, _meta: e }));
+
+    const ctx = document.getElementById(`chart-${c.id}`).getContext('2d');
+    charts.cand[c.id] = new Chart(ctx, {
+      data: { labels: xs, datasets: [
+        { type: 'line', label: `${c.name} (smoothed)`, data: ys, fill: true, pointRadius: 0, tension: 0.25 },
+        { type: 'line', label: 'Scientific consensus (prior)', data: (function(){
+            // Build dashed prior aligned to x grid
+            return priorDensity(xs, T.priorAlpha, T.centers, h);
+          })(), fill: false, pointRadius: 0, borderDash:[6,4], tension:0.25 },
+        { type: 'scatter', label: 'Statements', data: scatter, pointRadius: 3 }
+      ]},
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: {
+            callbacks: {
+              title: (items) => {
+                const it = items[0];
+                const x = it.parsed.x;
+                const t = (x<=-1.5) ? "Strongly disagree" :
+                          (x<-0.5) ? "Disagree" :
+                          (x<0.5) ? "Uncertain" :
+                          (x<1.5) ? "Agree" : "Strongly agree";
+                return `Likert: ${t}`;
+              },
+              label: (ctx) => {
+                if(ctx.dataset.type === 'scatter'){
+                  const e = ctx.raw._meta;
+                  return `${e.date} • ${e.source_type} • ${e.audience_type}\n“${e.extracted_text}” (w=${e.effective_weight})`;
+                } else {
+                  return `Density: ${ctx.parsed.y.toFixed(3)}`;
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'linear', min: -2, max: 2, ticks: {
+              stepSize: 1,
+              callback: (val)=> ({'-2':"Strongly disagree",'-1':"Disagree",'0':"Uncertain",'1':"Agree",'2':"Strongly agree"})[val] || ""
+            }
+          },
+          y: { title: { display: true, text: "Density" }, beginAtZero: true }
+        }
+      }
+    });
+  });
+}
+
+function renderEvidenceTable(){
+  const rows = getFilteredEvidence(currentTopic);
+  rows.sort((a,b)=> (a.date > b.date ? -1 : 1));
+  const name = id => (CANDIDATES.find(c=>c.id===id)?.name || id);
+  evidenceBody.innerHTML = '';
+  rows.forEach(e => {
+    const tr = document.createElement('tr');
+    tr.className = "border-b";
+    tr.innerHTML = `
+      <td class="py-2 pr-4 whitespace-nowrap">${e.date}</td>
+      <td class="py-2 pr-4">${name(e.candidate_id)}</td>
+      <td class="py-2 pr-4">${e.source_type.replace('_',' ')}</td>
+      <td class="py-2 pr-4">${e.audience_type.replace('_',' ')}</td>
+      <td class="py-2 pr-4 max-w-[480px]">${e.extracted_text}</td>
+      <td class="py-2 pr-4">${likertLabel(e.x)}</td>
+      <td class="py-2">${(e.effective_weight||0.2).toFixed(2)}</td>
+    `;
+    evidenceBody.appendChild(tr);
+  });
+}
+
+function renderAll(){
+  renderTopicHeader();
+  renderPrior();
+  renderCandidates();
+  renderEvidenceTable();
+}
+
+// initial
+renderAll();
+</script>
+</body>
+</html>
