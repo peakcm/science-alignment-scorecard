@@ -21,7 +21,7 @@ The **Science Alignment Scorecard** is a web application that measures how well 
 - **Configuration**: `_config.yml` - Jekyll configuration for GitHub Pages hosting
 - **Data Files**: 
   - `scientific-consensus.json` - Scientific consensus positions on key topics
-  - `candidate-date.json` - Candidate statements and positions over time
+  - `candidate-data.json` - Candidate statements and positions over time
 
 ### Backend Components
 - **API Server**: `server.js` - Express.js server providing ballot lookup functionality
@@ -95,7 +95,7 @@ node server.js
 
 ## Common Tasks
 
-- **Add New Candidate**: Update `candidate-date.json` with new candidate data following the existing structure
+- **Add New Candidate**: Update `candidate-data.json` with new candidate data following the existing structure
 - **Add Scientific Topic**: Update `scientific-consensus.json` with new consensus data and corresponding candidate positions
 - **Update Styling**: Modify CSS within `docs/index_html.html` (embedded styles)
 - **API Changes**: Modify `server.js` for backend functionality
