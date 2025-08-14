@@ -4,7 +4,7 @@ A project strictly to practice claude code across a range of activities, includi
 ```markdown
 # 🔬 Science Alignment Scorecard
 
-A tool for measuring how well political candidates align with scientific consensus on key issues.
+A tool for measuring how well a public individual aligns with scientific consensus on key issues.
 
 ## 🎯 Features
 
@@ -34,7 +34,7 @@ Visit: https://yourusername.github.io/science-alignment-scorecard/
 
 ## 🤝 Contributing
 
-This is an open-source project aimed at promoting science-based voting. Contributions welcome!
+This is an open-source project aimed at compiling statements related to science, and their overlap with scientific consensus.
 
 ## 📊 Data Sources
 
@@ -44,10 +44,6 @@ Scientific consensus data sourced from:
 - Major scientific institutions
 - Expert consensus studies
 
-## 📧 Contact
-
-Questions or suggestions? Open an issue or contact [your-email@example.com]
-
 ---
-**Disclaimer**: This tool is for educational purposes. Candidate data is illustrative for demonstration.
+**Disclaimer**: This tool is for educational purposes. Consensus and individual data are illustrative for demonstration.
 ```
