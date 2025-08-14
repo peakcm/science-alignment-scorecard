@@ -103,4 +103,40 @@ node server.js
 
 ## Deployment
 
-The site deploys automatically to GitHub Pages when changes are pushed to the main branch. The backend server would need to be deployed separately to a service like Heroku, Railway, or similar Node.js hosting platform.
+### Frontend (GitHub Pages)
+The site deploys automatically to GitHub Pages when changes are pushed to the main branch.
+
+### Backend (Railway)
+The Express.js API server is configured for Railway deployment:
+
+**Prerequisites:**
+1. Install Railway CLI: `npm install -g @railway/cli`
+2. Login to Railway: `railway login`
+
+**Deploy to Railway:**
+```bash
+# Initialize Railway project (first time only)
+railway login
+railway init
+
+# Set environment variables in Railway dashboard or CLI:
+railway variables set GOOGLE_CIVIC_API_KEY=your_api_key_here
+railway variables set CORS_ORIGIN=https://yourusername.github.io
+
+# Deploy
+git push # Railway will auto-deploy on push if connected to GitHub
+
+# Or deploy directly
+railway up
+```
+
+**Required Environment Variables:**
+- `GOOGLE_CIVIC_API_KEY` - Your Google Civic Information API key
+- `CORS_ORIGIN` - Your GitHub Pages URL (e.g., `https://yourusername.github.io`)
+- `PORT` - Automatically set by Railway
+
+**Files for Railway:**
+- `package.json` - Node.js dependencies and scripts
+- `railway.json` - Railway configuration
+- `server.js` - Express.js API server
+- `.gitignore` - Excludes node_modules and environment files
