@@ -1021,7 +1021,7 @@
                 // Load JSON data files (they're in the root directory, one level up)
                 const [consensusResponse, candidateResponse] = await Promise.all([
                     fetch('../scientific-consensus.json'),
-                    fetch('../candidate-date.json')
+                    fetch('../candidate-data.json')
                 ]);
                 
                 if (!consensusResponse.ok || !candidateResponse.ok) {
