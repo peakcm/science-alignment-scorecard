@@ -6,9 +6,26 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// CORS configuration - only allow your GitHub Pages site
+// CORS configuration - allow GitHub Pages site and localhost for development
+const allowedOrigins = [
+    process.env.CORS_ORIGIN, 
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'http://127.0.0.1:3000'
+].filter(Boolean); // Remove undefined values
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, Postman, etc.)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log(`Blocked CORS request from origin: ${origin}`);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
@@ -73,5 +90,7 @@ app.get('/api/health', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`🚀 Science Scorecard API running on port ${PORT}`);
-    console.log(`📍 Allowed origin: ${process.env.CORS_ORIGIN}`);
+    console.log(`📍 Allowed origins: ${allowedOrigins.join(', ')}`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔑 Google Civic API: ${process.env.GOOGLE_CIVIC_API_KEY ? '✅ Configured' : '❌ Missing'}`);
 });
