@@ -1,0 +1,22 @@
+```yaml
+title: Science Alignment Scorecard
+description: Measuring political candidates' alignment with scientific consensus
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# GitHub Pages settings
+url: "https://yourusername.github.io"
+baseurl: "/science-alignment-scorecard"
+
+# SEO settings
+author: Your Name
+twitter:
+  username: yourtwitterhandle
+facebook:
+  app_id: 1234567890
+
+# Google Analytics (optional)
+google_analytics: G-XXXXXXXXXX
+```

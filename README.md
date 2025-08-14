@@ -1,43 +1,50 @@
-# Science Index (Prototype)
+```markdown
+# 🔬 Science Alignment Scorecard
 
-End-to-end starter repo for the **Science Index** concept: schemas, seeds, mock APIs (Express + FastAPI), OpenAPI spec, and a static web demo (including a Likert density view).
+A tool for measuring how well political candidates align with scientific consensus on key issues.
 
-## Structure
+## 🎯 Features
+
+- **Candidate Analysis**: Detailed breakdown of positions on scientific topics
+- **Ballot Lookup**: Find candidates on your local ballot
+- **Trend Analysis**: See how positions change over time  
+- **Export & Share**: Download reports and share via social media
+- **Interactive Visualizations**: Position distributions and consensus data
+
+## 🧪 Scientific Topics Covered
+
+- Childhood immunization and vaccine safety
+- Human-driven climate change
+- COVID-19 origins investigation
+- Nuclear energy safety
+- GMO food safety
+
+## 🏗️ Built With
+
+- HTML5, CSS3, JavaScript (ES6+)
+- Chart.js for data visualization
+- Responsive design for mobile/desktop
+
+## 🌐 Live Demo
+
+Visit: https://yourusername.github.io/science-alignment-scorecard/
+
+## 🤝 Contributing
+
+This is an open-source project aimed at promoting science-based voting. Contributions welcome!
+
+## 📊 Data Sources
+
+Scientific consensus data sourced from:
+- WHO, CDC, IPCC reports
+- Peer-reviewed meta-analyses  
+- Major scientific institutions
+- Expert consensus studies
+
+## 📧 Contact
+
+Questions or suggestions? Open an issue or contact [your-email@example.com]
+
+---
+**Disclaimer**: This tool is for educational purposes. Candidate data is illustrative for demonstration.
 ```
-openapi/             # OpenAPI 3 spec
-schemas/             # JSON Schemas for core objects
-seeds/               # JSON:API seed documents
-servers/express/     # Node Express mock API (reads seeds)
-servers/fastapi/     # Python FastAPI mock API (reads seeds)
-web/demo/            # Static demo: index.html (bar) & likert.html
-.github/workflows/   # Pages deploy for /web/demo
-```
-
-## Run mock APIs
-
-### Express (Node 18+)
-```bash
-cd servers/express
-npm install
-npm start
-# http://localhost:5055/topics
-```
-
-### FastAPI (Python 3.10+)
-```bash
-cd servers/fastapi
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app:app --reload --port 5056
-# http://localhost:5056/topics
-```
-
-## View the static demo
-Default:
-- `web/demo/index.html` (**Likert tabs**: 2 statements, 50+ mock points per candidate, filters, KDE, consensus prior)
-
-Additional:
-- `web/demo/bar.html` (legacy bar charts)
-- `web/demo/likert.html` (single-statement Likert + KDE)
-- `web/demo/likert-tabs.html` (same as index)
