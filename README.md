@@ -1,3 +1,6 @@
+A project strictly to practice claude code across a range of activities, including bayesian statistics, health communications and sentiment analysis, and access to interactive outputs via web pages.
+
+
 ```markdown
 # 🔬 Science Alignment Scorecard
 
