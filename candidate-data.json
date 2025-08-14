@@ -1,0 +1,650 @@
+{
+  "candidates": {
+    "candidate1": {
+      "id": "candidate1",
+      "name": "Dr. Sarah Chen",
+      "party": "Democratic",
+      "office": "U.S. Senate",
+      "state": "WA",
+      "overallPattern": "consistently-right",
+      "patternDescription": "High alignment with scientific consensus across most topics.",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2023-07-10", "score": 95 },
+          { "date": "2023-09-20", "score": 92 },
+          { "date": "2024-01-15", "score": 98 }
+        ],
+        "climate_change": [
+          { "date": "2023-08-22", "score": 94 },
+          { "date": "2023-11-15", "score": 89 },
+          { "date": "2024-02-01", "score": 96 }
+        ],
+        "covid_origins": [
+          { "date": "2023-06-05", "score": 30 },
+          { "date": "2023-10-12", "score": 40 },
+          { "date": "2024-01-30", "score": 35 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_001",
+              "position": 98,
+              "date": "2024-01-15",
+              "quote": "Vaccines are one of the greatest public health achievements in human history.",
+              "source": "Healthcare Summit Speech",
+              "sourceUrl": "https://example.com/speech1",
+              "context": "Annual Healthcare Summit keynote address",
+              "verified": true
+            },
+            {
+              "id": "stmt_002", 
+              "position": 92,
+              "date": "2023-09-20",
+              "quote": "We need to ensure all children have access to life-saving vaccines.",
+              "source": "Campaign Interview",
+              "sourceUrl": "https://example.com/interview1",
+              "context": "Local TV station interview",
+              "verified": true
+            },
+            {
+              "id": "stmt_003",
+              "position": 95,
+              "date": "2023-07-10", 
+              "quote": "The evidence is overwhelming - vaccines save lives.",
+              "source": "Policy Paper",
+              "sourceUrl": "https://example.com/policy1",
+              "context": "Healthcare policy white paper",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 95,
+          "candidateVariability": 6,
+          "alignmentScore": 92
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_004",
+              "position": 96,
+              "date": "2024-02-01",
+              "quote": "Climate change is real, human-caused, and demands urgent action.",
+              "source": "Senate Floor Speech",
+              "sourceUrl": "https://example.com/senate1",
+              "context": "Climate legislation debate",
+              "verified": true
+            },
+            {
+              "id": "stmt_005",
+              "position": 89,
+              "date": "2023-11-15",
+              "quote": "While natural factors play a role, human emissions are the dominant driver.",
+              "source": "Climate Panel",
+              "sourceUrl": "https://example.com/panel1",
+              "context": "University climate science panel",
+              "verified": true
+            },
+            {
+              "id": "stmt_006",
+              "position": 94,
+              "date": "2023-08-22",
+              "quote": "The scientific evidence is clear about human responsibility for climate change.",
+              "source": "Environmental Forum",
+              "sourceUrl": "https://example.com/forum1",
+              "context": "Environmental advocacy event",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 93,
+          "candidateVariability": 7,
+          "alignmentScore": 88
+        },
+        "covid_origins": {
+          "statements": [
+            {
+              "id": "stmt_007",
+              "position": 35,
+              "date": "2024-01-30",
+              "quote": "We need more investigation before drawing firm conclusions about COVID origins.",
+              "source": "Press Conference", 
+              "sourceUrl": "https://example.com/press1",
+              "context": "Weekly press briefing",
+              "verified": true
+            },
+            {
+              "id": "stmt_008",
+              "position": 40,
+              "date": "2023-10-12",
+              "quote": "All possibilities should remain on the table until we have definitive evidence.",
+              "source": "Committee Hearing",
+              "sourceUrl": "https://example.com/hearing1",
+              "context": "Intelligence committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_009",
+              "position": 30,
+              "date": "2023-06-05",
+              "quote": "The origin question requires careful scientific investigation, not speculation.",
+              "source": "Op-Ed",
+              "sourceUrl": "https://example.com/oped1",
+              "context": "Washington Post opinion piece",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 35,
+          "candidateVariability": 10,
+          "alignmentScore": 82
+        },
+        "nuclear_energy": {
+          "statements": [
+            {
+              "id": "stmt_010",
+              "position": 82,
+              "date": "2024-03-05",
+              "quote": "Nuclear energy can be safe with proper oversight and modern technology.",
+              "source": "Energy Conference",
+              "sourceUrl": "https://example.com/energy1",
+              "context": "Clean Energy Summit panel",
+              "verified": true
+            },
+            {
+              "id": "stmt_011", 
+              "position": 75,
+              "date": "2023-12-01",
+              "quote": "We should consider nuclear as part of our clean energy mix, with appropriate safeguards.",
+              "source": "Town Hall",
+              "sourceUrl": "https://example.com/townhall1", 
+              "context": "Constituent town hall meeting",
+              "verified": true
+            },
+            {
+              "id": "stmt_012",
+              "position": 70,
+              "date": "2023-09-18",
+              "quote": "Nuclear safety has improved dramatically, though concerns remain about waste.",
+              "source": "Interview",
+              "sourceUrl": "https://example.com/interview2",
+              "context": "NPR radio interview",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 76,
+          "candidateVariability": 12,
+          "alignmentScore": 85
+        },
+        "gmo_safety": {
+          "statements": [
+            {
+              "id": "stmt_013",
+              "position": 35,
+              "date": "2024-02-20",
+              "quote": "We need more long-term studies on GMO safety and better labeling.",
+              "source": "Agriculture Committee",
+              "sourceUrl": "https://example.com/agcom1",
+              "context": "House Agriculture Committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_014",
+              "position": 45,
+              "date": "2023-11-30",
+              "quote": "I have concerns about the rapid approval process for some GMO crops.",
+              "source": "Farm Bill Hearing",
+              "sourceUrl": "https://example.com/farmbill1",
+              "context": "Farm Bill markup session",
+              "verified": true
+            },
+            {
+              "id": "stmt_015",
+              "position": 40,
+              "date": "2023-08-15",
+              "quote": "Consumers have a right to know what's in their food, including GMO ingredients.",
+              "source": "Consumer Advocacy Event",
+              "sourceUrl": "https://example.com/consumer1",
+              "context": "Food safety advocacy conference",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 40,
+          "candidateVariability": 10,
+          "alignmentScore": 45
+        }
+      }
+    },
+    "candidate2": {
+      "id": "candidate2",
+      "name": "Rep. Michael Torres", 
+      "party": "Republican",
+      "office": "U.S. Senate",
+      "state": "WA",
+      "overallPattern": "inconsistent",
+      "patternDescription": "Mixed record with some strong alignments and some significant departures from consensus.",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2023-07-20", "score": 75 },
+          { "date": "2023-10-05", "score": 60 },
+          { "date": "2024-01-10", "score": 85 }
+        ],
+        "climate_change": [
+          { "date": "2023-09-12", "score": 20 },
+          { "date": "2023-11-08", "score": 30 },
+          { "date": "2024-02-15", "score": 25 }
+        ],
+        "covid_origins": [
+          { "date": "2023-06-18", "score": 82 },
+          { "date": "2023-09-30", "score": 88 },
+          { "date": "2024-01-25", "score": 85 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_016",
+              "position": 85,
+              "date": "2024-01-10",
+              "quote": "Most vaccines are beneficial, but parents should have more choice.",
+              "source": "Town Hall",
+              "sourceUrl": "https://example.com/townhall2",
+              "context": "District town hall meeting",
+              "verified": true
+            },
+            {
+              "id": "stmt_017",
+              "position": 60,
+              "date": "2023-10-05", 
+              "quote": "We need to investigate potential links between vaccines and autism more thoroughly.",
+              "source": "Health Subcommittee",
+              "sourceUrl": "https://example.com/subcom1",
+              "context": "House Health subcommittee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_018",
+              "position": 75,
+              "date": "2023-07-20",
+              "quote": "Vaccines work, but mandate policies go too far.",
+              "source": "Radio Interview",
+              "sourceUrl": "https://example.com/radio1",
+              "context": "Conservative talk radio show",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 73,
+          "candidateVariability": 25,
+          "alignmentScore": 52
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_019",
+              "position": 25,
+              "date": "2024-02-15",
+              "quote": "Climate has always changed naturally. Human impact is still being debated.",
+              "source": "Energy Committee",
+              "sourceUrl": "https://example.com/energy2",
+              "context": "House Energy Committee markup",
+              "verified": true
+            },
+            {
+              "id": "stmt_020",
+              "position": 30,
+              "date": "2023-11-08",
+              "quote": "We can't be certain humans are the main cause of climate change.",
+              "source": "Fox News Interview",
+              "sourceUrl": "https://example.com/foxnews1",
+              "context": "Cable news interview",
+              "verified": true
+            },
+            {
+              "id": "stmt_021",
+              "position": 20,
+              "date": "2023-09-12",
+              "quote": "Climate models are unreliable and often wrong.",
+              "source": "Campaign Rally",
+              "sourceUrl": "https://example.com/rally1",
+              "context": "Campaign fundraising event",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 25,
+          "candidateVariability": 10,
+          "alignmentScore": 8
+        },
+        "covid_origins": {
+          "statements": [
+            {
+              "id": "stmt_022",
+              "position": 85,
+              "date": "2024-01-25",
+              "quote": "The evidence strongly suggests COVID came from the Wuhan lab.",
+              "source": "Press Release",
+              "sourceUrl": "https://example.com/press2",
+              "context": "Official congressional press release",
+              "verified": true
+            },
+            {
+              "id": "stmt_023",
+              "position": 88,
+              "date": "2023-09-30",
+              "quote": "China covered up the lab leak and we need accountability.",
+              "source": "Intelligence Committee",
+              "sourceUrl": "https://example.com/intel1",
+              "context": "House Intelligence Committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_024",
+              "position": 82,
+              "date": "2023-06-18",
+              "quote": "It's obvious this virus was engineered in a laboratory.",
+              "source": "Conservative Conference",
+              "sourceUrl": "https://example.com/cpac1",
+              "context": "CPAC conference speech",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 85,
+          "candidateVariability": 6,
+          "alignmentScore": 35
+        },
+        "nuclear_energy": {
+          "statements": [
+            {
+              "id": "stmt_025",
+              "position": 92,
+              "date": "2024-03-12",
+              "quote": "Nuclear is our cleanest, most reliable energy source.",
+              "source": "Energy Independence Rally",
+              "sourceUrl": "https://example.com/rally2",
+              "context": "Energy independence campaign event",
+              "verified": true
+            },
+            {
+              "id": "stmt_026",
+              "position": 88,
+              "date": "2023-12-15",
+              "quote": "America needs to lead in nuclear technology for energy security.",
+              "source": "Industry Conference",
+              "sourceUrl": "https://example.com/industry1",
+              "context": "Nuclear industry conference",
+              "verified": true
+            },
+            {
+              "id": "stmt_027",
+              "position": 90,
+              "date": "2023-10-08",
+              "quote": "Nuclear power is key to American energy dominance.",
+              "source": "Committee Vote",
+              "sourceUrl": "https://example.com/vote1",
+              "context": "Energy committee vote statement",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 90,
+          "candidateVariability": 4,
+          "alignmentScore": 88
+        },
+        "gmo_safety": {
+          "statements": [
+            {
+              "id": "stmt_028",
+              "position": 15,
+              "date": "2024-02-28",
+              "quote": "GMOs have been thoroughly tested and are safe for consumption.",
+              "source": "Agriculture Roundtable",
+              "sourceUrl": "https://example.com/agri1",
+              "context": "Farm state agriculture roundtable",
+              "verified": true
+            },
+            {
+              "id": "stmt_029",
+              "position": 12,
+              "date": "2023-11-22",
+              "quote": "American farmers should be free to use the best technology available.",
+              "source": "Farm State Visit",
+              "sourceUrl": "https://example.com/farm1",
+              "context": "Iowa farm visit",
+              "verified": true
+            },
+            {
+              "id": "stmt_030",
+              "position": 18,
+              "date": "2023-08-30",
+              "quote": "GMO crops help feed the world safely and efficiently.",
+              "source": "Rural Forum",
+              "sourceUrl": "https://example.com/rural1",
+              "context": "Rural economic development forum",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 15,
+          "candidateVariability": 6,
+          "alignmentScore": 85
+        }
+      }
+    },
+    "candidate3": {
+      "id": "candidate3",
+      "name": "Sen. Rebecca Wallace",
+      "party": "Republican",
+      "office": "Governor",
+      "state": "WA",
+      "overallPattern": "improving",
+      "patternDescription": "Generally strong alignment with some evolution toward better scientific positions over time.",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2023-07-15", "score": 85 },
+          { "date": "2023-10-20", "score": 88 },
+          { "date": "2024-02-05", "score": 96 }
+        ],
+        "climate_change": [
+          { "date": "2023-08-05", "score": 92 },
+          { "date": "2023-12-10", "score": 94 },
+          { "date": "2024-03-01", "score": 98 }
+        ],
+        "covid_origins": [
+          { "date": "2023-05-28", "score": 25 },
+          { "date": "2023-09-15", "score": 32 },
+          { "date": "2024-01-20", "score": 28 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_031",
+              "position": 96,
+              "date": "2024-02-05",
+              "quote": "Vaccines are essential for public health and individual protection.",
+              "source": "Health Policy Address",
+              "sourceUrl": "https://example.com/health1",
+              "context": "State health policy address",
+              "verified": true
+            },
+            {
+              "id": "stmt_032",
+              "position": 88,
+              "date": "2023-10-20",
+              "quote": "We must combat vaccine misinformation with facts and science.",
+              "source": "Medical Association Conference",
+              "sourceUrl": "https://example.com/medical1",
+              "context": "State medical association annual conference",
+              "verified": true
+            },
+            {
+              "id": "stmt_033",
+              "position": 85,
+              "date": "2023-07-15",
+              "quote": "Immunization programs are among our greatest public health successes.",
+              "source": "Committee Hearing",
+              "sourceUrl": "https://example.com/hearing2",
+              "context": "Senate health committee hearing",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 90,
+          "candidateVariability": 11,
+          "alignmentScore": 85
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_034",
+              "position": 98,
+              "date": "2024-03-01",
+              "quote": "Human-caused climate change is the defining challenge of our time.",
+              "source": "Climate Summit",
+              "sourceUrl": "https://example.com/climate1",
+              "context": "Regional climate summit keynote",
+              "verified": true
+            },
+            {
+              "id": "stmt_035",
+              "position": 94,
+              "date": "2023-12-10",
+              "quote": "The science is unequivocal - we are driving climate change.",
+              "source": "UN Conference",
+              "sourceUrl": "https://example.com/un1",
+              "context": "UN Climate Change Conference",
+              "verified": true
+            },
+            {
+              "id": "stmt_036",
+              "position": 92,
+              "date": "2023-08-05",
+              "quote": "Overwhelming evidence shows humans are changing our climate.",
+              "source": "Environmental Committee",
+              "sourceUrl": "https://example.com/envcom1",
+              "context": "Senate Environment Committee hearing",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 95,
+          "candidateVariability": 6,
+          "alignmentScore": 95
+        },
+        "covid_origins": {
+          "statements": [
+            {
+              "id": "stmt_037",
+              "position": 28,
+              "date": "2024-01-20",
+              "quote": "We need transparent investigation of all possible COVID origins.",
+              "source": "Intelligence Briefing",
+              "sourceUrl": "https://example.com/brief1",
+              "context": "Senate intelligence briefing",
+              "verified": true
+            },
+            {
+              "id": "stmt_038",
+              "position": 32,
+              "date": "2023-09-15",
+              "quote": "Both natural and lab origins remain possible until proven otherwise.",
+              "source": "Science Committee",
+              "sourceUrl": "https://example.com/science1",
+              "context": "Senate science committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_039",
+              "position": 25,
+              "date": "2023-05-28",
+              "quote": "Premature conclusions about COVID origins undermine scientific integrity.",
+              "source": "Op-Ed",
+              "sourceUrl": "https://example.com/oped2",
+              "context": "Seattle Times opinion piece",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 28,
+          "candidateVariability": 7,
+          "alignmentScore": 88
+        },
+        "nuclear_energy": {
+          "statements": [
+            {
+              "id": "stmt_040",
+              "position": 65,
+              "date": "2024-03-18",
+              "quote": "Nuclear can be safe, but we must proceed carefully with oversight.",
+              "source": "Energy Hearing",
+              "sourceUrl": "https://example.com/energy3",
+              "context": "Senate energy committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_041",
+              "position": 58,
+              "date": "2023-11-12",
+              "quote": "Nuclear safety has improved, but waste storage remains a concern.",
+              "source": "Environmental Forum",
+              "sourceUrl": "https://example.com/envforum1",
+              "context": "Environmental policy forum",
+              "verified": true
+            },
+            {
+              "id": "stmt_042",
+              "position": 52,
+              "date": "2023-08-25",
+              "quote": "We should explore nuclear options while prioritizing renewables.",
+              "source": "Green Energy Conference",
+              "sourceUrl": "https://example.com/green1",
+              "context": "Green energy development conference",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 58,
+          "candidateVariability": 13,
+          "alignmentScore": 72
+        },
+        "gmo_safety": {
+          "statements": [
+            {
+              "id": "stmt_043",
+              "position": 22,
+              "date": "2024-02-12",
+              "quote": "Current evidence suggests GMOs are generally safe, though labeling is important.",
+              "source": "Consumer Protection Hearing",
+              "sourceUrl": "https://example.com/consumer2",
+              "context": "Consumer protection committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_044",
+              "position": 28,
+              "date": "2023-10-18",
+              "quote": "More long-term studies would help address public concerns about GMOs.",
+              "source": "Agriculture Committee",
+              "sourceUrl": "https://example.com/agcom2",
+              "context": "Senate Agriculture Committee hearing",
+              "verified": true
+            },
+            {
+              "id": "stmt_045",
+              "position": 35,
+              "date": "2023-07-08",
+              "quote": "We should be cautious about rapidly approving new GMO crops.",
+              "source": "Food Safety Forum",
+              "sourceUrl": "https://example.com/food1",
+              "context": "Food safety policy forum",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 28,
+          "candidateVariability": 13,
+          "alignmentScore": 68
+        }
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2024-03-15",
+    "totalCandidates": 3,
+    "dataQuality": "demo",
+    "methodology": "Statement positions scored using multi-method NLP analysis including GPT-4, stance detection models, and keyword analysis. Scores represent degree of agreement with scientific statement on 0-100 scale."
+  }
+}

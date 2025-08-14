@@ -1,0 +1,89 @@
+{
+  "topics": {
+    "childhood_immunization": {
+      "id": "childhood_immunization",
+      "statement": "Childhood immunization saves lives and prevents serious diseases",
+      "consensusPosition": 95,
+      "consensusWidth": 8,
+      "consensusInfo": {
+        "sources": [
+          "WHO Global Health Observatory",
+          "CDC Pink Book",
+          "Cochrane Review 2018"
+        ],
+        "summary": "Multiple large-scale studies and meta-analyses show vaccines prevent millions of deaths annually with extremely low risk profiles.",
+        "evidenceLevel": "very_high",
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    "climate_change": {
+      "id": "climate_change", 
+      "statement": "Human activities are the primary driver of current climate change",
+      "consensusPosition": 97,
+      "consensusWidth": 5,
+      "consensusInfo": {
+        "sources": [
+          "IPCC AR6 Report",
+          "NASA GISS",
+          "97% Expert Consensus Study"
+        ],
+        "summary": "Over 97% of actively publishing climate scientists agree that human activities are the primary cause of recent climate change.",
+        "evidenceLevel": "very_high",
+        "lastUpdated": "2023-12-20"
+      }
+    },
+    "covid_origins": {
+      "id": "covid_origins",
+      "statement": "COVID-19 definitely originated from a laboratory leak in Wuhan",
+      "consensusPosition": 25,
+      "consensusWidth": 35,
+      "consensusInfo": {
+        "sources": [
+          "WHO Investigation Report",
+          "Nature Origins Review", 
+          "Intelligence Community Assessment"
+        ],
+        "summary": "Current evidence is insufficient to determine origins definitively. Both natural spillover and lab leak remain plausible hypotheses requiring further investigation.",
+        "evidenceLevel": "low",
+        "lastUpdated": "2024-02-01"
+      }
+    },
+    "nuclear_energy": {
+      "id": "nuclear_energy",
+      "statement": "Nuclear energy is safe when properly regulated and managed",
+      "consensusPosition": 78,
+      "consensusWidth": 20,
+      "consensusInfo": {
+        "sources": [
+          "IAEA Safety Standards",
+          "MIT Nuclear Study",
+          "EU Scientific Committee"
+        ],
+        "summary": "Modern nuclear plants have strong safety records when properly designed, built, and operated under robust regulatory frameworks.",
+        "evidenceLevel": "high",
+        "lastUpdated": "2023-11-10"
+      }
+    },
+    "gmo_safety": {
+      "id": "gmo_safety",
+      "statement": "Genetically modified foods are unsafe for human consumption",
+      "consensusPosition": 12,
+      "consensusWidth": 15,
+      "consensusInfo": {
+        "sources": [
+          "WHO GMO Safety Assessment",
+          "FDA GRAS Reviews",
+          "European Food Safety Authority"
+        ],
+        "summary": "Extensive testing shows approved GMO foods are as safe as conventional foods. No credible evidence of unique health risks from genetic modification process itself.",
+        "evidenceLevel": "high",
+        "lastUpdated": "2023-10-25"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2024-03-15",
+    "methodology": "Consensus positions derived from peer-reviewed meta-analyses, major scientific institutions, and expert surveys. Position scores represent degree of agreement on Likert scale (0=Strongly Disagree, 100=Strongly Agree)."
+  }
+}
