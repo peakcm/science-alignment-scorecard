@@ -824,9 +824,7 @@
         <div class="tab-content active" id="candidate-analysis">
             <div class="candidate-selector">
                 <select id="candidateSelect">
-                    <option value="candidate1">Dr. Sarah Chen</option>
-                    <option value="candidate2">Rep. Michael Torres</option>
-                    <option value="candidate3">Sen. Rebecca Wallace</option>
+                    <option value="">Loading candidates...</option>
                 </select>
                 
                 <div class="date-filter">
@@ -1012,8 +1010,111 @@
     </div>
 
     <script>
-        // Enhanced data structure with trend data
-        const candidates = {
+        // Global variables to hold loaded data
+        let candidates = {};
+        let scientificConsensus = {};
+        let ballotData = {};
+
+        // Data loading functions
+        async function loadData() {
+            try {
+                // Load JSON data files (they're in the root directory, one level up)
+                const [consensusResponse, candidateResponse] = await Promise.all([
+                    fetch('../scientific-consensus.json'),
+                    fetch('../candidate-date.json')
+                ]);
+                
+                if (!consensusResponse.ok || !candidateResponse.ok) {
+                    throw new Error('Failed to load data files');
+                }
+                
+                scientificConsensus = await consensusResponse.json();
+                const candidateData = await candidateResponse.json();
+                
+                // Transform candidate data to match expected structure
+                candidates = transformCandidateData(candidateData, scientificConsensus);
+                
+                // Initialize ballot data (this would typically come from an API)
+                initializeBallotData();
+                
+                return true;
+            } catch (error) {
+                console.error('Error loading data:', error);
+                console.log('Falling back to embedded demo data');
+                
+                // Show user-friendly message
+                showNotification('Unable to load data files. Using demo data instead.', 'error');
+                
+                // Fallback to hardcoded data if JSON files fail to load
+                loadFallbackData();
+                return false;
+            }
+        }
+
+        function transformCandidateData(candidateData, consensusData) {
+            const transformed = {};
+            
+            Object.keys(candidateData.candidates).forEach(candidateId => {
+                const candidate = candidateData.candidates[candidateId];
+                transformed[candidateId] = {
+                    name: candidate.name,
+                    party: candidate.party,
+                    office: candidate.office,
+                    overallPattern: candidate.overallPattern,
+                    patternDescription: candidate.patternDescription,
+                    trendData: candidate.trendData || {},
+                    topics: []
+                };
+                
+                // Transform topics using consensus data
+                Object.keys(candidate.positions).forEach(topicId => {
+                    const position = candidate.positions[topicId];
+                    const consensusTopic = consensusData.topics[topicId];
+                    
+                    if (consensusTopic) {
+                        transformed[candidateId].topics.push({
+                            statement: consensusTopic.statement,
+                            consensusPosition: consensusTopic.consensusPosition,
+                            consensusWidth: consensusTopic.consensusWidth,
+                            consensusInfo: consensusTopic.consensusInfo,
+                            candidateStatements: position.statements || [],
+                            candidateMedian: position.candidateMedian,
+                            candidateVariability: position.candidateVariability,
+                            alignmentScore: position.alignmentScore
+                        });
+                    }
+                });
+            });
+            
+            return transformed;
+        }
+
+        function initializeBallotData() {
+            // Initialize mock ballot data (in production, this would come from an API)
+            ballotData = {
+                "WA": {
+                    district: "Washington State, 7th Congressional District",
+                    races: [
+                        {
+                            office: "U.S. Senate",
+                            candidates: ["candidate1", "candidate2"]
+                        },
+                        {
+                            office: "Governor", 
+                            candidates: ["candidate3", "candidate4"]
+                        },
+                        {
+                            office: "U.S. House",
+                            candidates: ["candidate5", "candidate6"]
+                        }
+                    ]
+                }
+            };
+        }
+
+        function loadFallbackData() {
+            // Fallback hardcoded data in case JSON files can't be loaded
+            candidates = {
             candidate1: {
                 name: "Dr. Sarah Chen",
                 party: "Democratic",
@@ -1540,27 +1641,10 @@
                 ]
             }
         };
-
-        // Mock ballot data based on address
-        const ballotData = {
-            "WA": {
-                district: "Washington State, 7th Congressional District",
-                races: [
-                    {
-                        office: "U.S. Senate",
-                        candidates: ["candidate1", "candidate2"]
-                    },
-                    {
-                        office: "Governor", 
-                        candidates: ["candidate3", "candidate4"]
-                    },
-                    {
-                        office: "U.S. House",
-                        candidates: ["candidate5", "candidate6"]
-                    }
-                ]
-            }
-        };
+            
+            // Initialize ballot data for fallback
+            initializeBallotData();
+        }
 
         let tooltip = null;
         let currentDateFilter = 'all';
@@ -2076,28 +2160,75 @@
             );
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            init();
-            document.getElementById('candidateSelect').addEventListener('change', switchCandidate);
-            document.getElementById('dateFilter').addEventListener('change', updateDateFilter);
-            
-            // Close modal when clicking outside
-            document.getElementById('shareModal').addEventListener('click', (e) => {
-                if (e.target.id === 'shareModal') {
-                    closeShareModal();
+        // Initialize application
+        async function initializeApp() {
+            try {
+                // Show loading indicator
+                document.body.style.opacity = '0.7';
+                
+                // Load data from JSON files
+                const dataLoaded = await loadData();
+                
+                if (dataLoaded) {
+                    console.log('Data loaded successfully from JSON files');
+                } else {
+                    console.log('Using fallback hardcoded data');
                 }
-            });
+                
+                // Initialize UI
+                init();
+                
+                // Populate candidate selector
+                populateCandidateSelector();
+                
+                // Set up event listeners
+                document.getElementById('candidateSelect').addEventListener('change', switchCandidate);
+                document.getElementById('dateFilter').addEventListener('change', updateDateFilter);
+                
+                // Close modal when clicking outside
+                document.getElementById('shareModal').addEventListener('click', (e) => {
+                    if (e.target.id === 'shareModal') {
+                        closeShareModal();
+                    }
+                });
+                
+                // Close modal with Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        closeShareModal();
+                    }
+                });
+                
+                // Initialize with first candidate
+                switchCandidate();
+                
+                // Hide loading indicator
+                document.body.style.opacity = '1';
+                
+            } catch (error) {
+                console.error('Error initializing application:', error);
+                // Fallback initialization
+                init();
+                switchCandidate();
+                document.body.style.opacity = '1';
+            }
+        }
+        
+        function populateCandidateSelector() {
+            const select = document.getElementById('candidateSelect');
+            select.innerHTML = '';
             
-            // Close modal with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeShareModal();
-                }
+            Object.keys(candidates).forEach(candidateId => {
+                const candidate = candidates[candidateId];
+                const option = document.createElement('option');
+                option.value = candidateId;
+                option.textContent = candidate.name;
+                select.appendChild(option);
             });
-            
-            switchCandidate();
-        });
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
 </body>
 </html>
