@@ -4,9 +4,11 @@
       "WebSearch",
       "WebFetch(domain:gallegoforarizona.com)",
       "WebFetch(domain:rubengallego.house.gov)",
-      "WebFetch(domain:www.politifact.com)"
+      "WebFetch(domain:www.politifact.com)",
+      "Bash(git add:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "defaultMode": "acceptEdits"
   }
 }
