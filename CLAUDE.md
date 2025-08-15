@@ -86,6 +86,40 @@ node server.js
 - `improving`: Trending toward better alignment
 - `declining`: Trending away from consensus
 
+## Statement Research Methodology
+
+### Research Safeguards (Updated Process)
+
+**1. Individual Statement Analysis**
+- Treat each statement as an independent observation
+- Score based solely on the content of that specific statement
+- Avoid bias from candidate's party affiliation, general reputation, or other statements
+- Focus only on how well the individual statement aligns with scientific consensus
+
+**2. Enhanced Verification Process**
+- **Exact Quote Extraction**: Copy verbatim text from original source, preserving punctuation and capitalization
+- **Source Verification**: Verify hyperlink accessibility and ensure quote appears in linked source
+- **Context Accuracy**: Confirm the statement context matches the source material
+- **Direct Attribution**: Ensure quote is directly attributed to the candidate, not paraphrased by media
+
+**3. Statement-Specific Scoring**
+- Base score (0-100) solely on statement content alignment with scientific consensus
+- Ignore candidate's political party or previous positions
+- Consider only:
+  - Scientific accuracy of the specific claim
+  - Alignment with established scientific consensus
+  - Acknowledgment of scientific uncertainty where appropriate
+  - Evidence-based reasoning within the statement
+
+**4. Quality Control Checklist**
+For each statement entry, verify:
+- [ ] Quote copied exactly from source (no paraphrasing)
+- [ ] Source URL accessible and contains the exact quote
+- [ ] Statement date accurately reflects when it was made/published
+- [ ] Score reflects only the scientific alignment of this specific statement
+- [ ] Context field accurately describes the setting/purpose of the statement
+- [ ] No assumptions made about candidate's broader views based on party/reputation
+
 ## Important Notes
 
 - **API Key Security**: The Google Civic API key should be stored in environment variables, not committed to the repository

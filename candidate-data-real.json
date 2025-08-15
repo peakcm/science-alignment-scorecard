@@ -8,62 +8,15 @@
       "district": "Washington's 7th Congressional District",
       "state": "WA",
       "overallPattern": "consistently-correct",
-      "patternDescription": "Strong alignment with scientific consensus across health, climate, and technology issues.",
+      "patternDescription": "Strong alignment with climate science consensus based on legislative record and public statements.",
       "trendData": {
-        "childhood_immunization": [
-          { "date": "2021-08-15", "score": 98 },
-          { "date": "2023-03-10", "score": 96 },
-          { "date": "2024-09-20", "score": 98 }
-        ],
         "climate_change": [
           { "date": "2023-08-02", "score": 95 },
           { "date": "2023-09-27", "score": 96 },
           { "date": "2024-07-26", "score": 96 }
-        ],
-        "covid_origins": [
-          { "date": "2021-05-12", "score": 35 },
-          { "date": "2023-02-15", "score": 30 },
-          { "date": "2024-06-10", "score": 28 }
         ]
       },
       "positions": {
-        "childhood_immunization": {
-          "statements": [
-            {
-              "id": "jayapal_001",
-              "position": 98,
-              "date": "2024-09-20",
-              "quote": "Vaccines save lives and are one of the most effective public health tools we have. We must ensure equitable access to vaccines for all communities.",
-              "source": "House Committee on Health Hearing",
-              "sourceUrl": "https://www.congress.gov/committee-reports",
-              "context": "House Energy and Commerce Health Subcommittee hearing on vaccine equity",
-              "verified": true
-            },
-            {
-              "id": "jayapal_002",
-              "position": 96,
-              "date": "2023-03-10",
-              "quote": "Misinformation about vaccines is dangerous and deadly. We need evidence-based policy that follows the science.",
-              "source": "Town Hall Meeting",
-              "sourceUrl": "https://jayapal.house.gov/media/press-releases",
-              "context": "Seattle district town hall on public health",
-              "verified": true
-            },
-            {
-              "id": "jayapal_003",
-              "position": 98,
-              "date": "2021-08-15",
-              "quote": "I strongly support vaccine requirements for healthcare workers and educators to protect our most vulnerable populations.",
-              "source": "Congressional Statement",
-              "sourceUrl": "https://jayapal.house.gov/media/press-releases",
-              "context": "Statement on COVID-19 vaccine mandates",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 97,
-          "candidateVariability": 2,
-          "alignmentScore": 95
-        },
         "climate_change": {
           "statements": [
             {
@@ -100,7 +53,7 @@
               "id": "jayapal_climate_004",
               "position": 98,
               "date": "2023-04-24",
-              "quote": "Co-sponsored H.Res.319 recognizing the duty of the Federal Government to create a Green New Deal",
+              "quote": "Congressional co-sponsorship of H.Res.319 recognizing the duty of the Federal Government to create a Green New Deal",
               "source": "Congressional Action - Green New Deal Resolution",
               "sourceUrl": "https://www.congress.gov/bill/118th-congress/house-resolution/319",
               "context": "Co-sponsoring Green New Deal resolution in 118th Congress",
@@ -110,7 +63,7 @@
               "id": "jayapal_climate_005",
               "position": 96,
               "date": "2024-07-26",
-              "quote": "I proudly supported the Inflation Reduction Act to address climate change impacts and improve the state's resilience efforts.",
+              "quote": "I was proud to directly support Washington State's application and to have championed the Inflation Reduction Act",
               "source": "House Press Release - Washington Climate Funding",
               "sourceUrl": "https://jayapal.house.gov/2024/07/26/jayapal-helps-secure-more-than-75-million-to-support-climate-resilience-efforts-across-washington-state/",
               "context": "Announcing $75+ million in climate resilience funding for Washington",
@@ -130,117 +83,6 @@
           "candidateMedian": 96,
           "candidateVariability": 2,
           "alignmentScore": 98
-        },
-        "covid_origins": {
-          "statements": [
-            {
-              "id": "jayapal_007",
-              "position": 28,
-              "date": "2024-06-10",
-              "quote": "We should follow scientific evidence in investigating COVID's origins, not engage in political blame games that fuel anti-Asian hate.",
-              "source": "Committee Hearing",
-              "sourceUrl": "https://www.congress.gov/committee-reports",
-              "context": "House Foreign Affairs Committee hearing on pandemic response",
-              "verified": true
-            },
-            {
-              "id": "jayapal_008",
-              "position": 30,
-              "date": "2023-02-15",
-              "quote": "A thorough, science-based investigation into COVID origins is important, but we must avoid xenophobic rhetoric.",
-              "source": "Press Conference",
-              "sourceUrl": "https://jayapal.house.gov/media/press-releases",
-              "context": "Press conference on pandemic preparedness",
-              "verified": true
-            },
-            {
-              "id": "jayapal_009",
-              "position": 35,
-              "date": "2021-05-12",
-              "quote": "We need transparent international cooperation to understand COVID's origins while preventing stigmatization of any community.",
-              "source": "House Floor Statement",
-              "sourceUrl": "https://www.congress.gov/congressional-record",
-              "context": "House statement on pandemic investigation",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 31,
-          "candidateVariability": 7,
-          "alignmentScore": 85
-        },
-        "nuclear_energy": {
-          "statements": [
-            {
-              "id": "jayapal_010",
-              "position": 45,
-              "date": "2024-07-20",
-              "quote": "While nuclear can be part of clean energy, we must prioritize safety and focus primarily on renewable sources like solar and wind.",
-              "source": "Energy Committee Hearing",
-              "sourceUrl": "https://www.congress.gov/committee-reports",
-              "context": "House Energy and Commerce Committee hearing on clean energy",
-              "verified": true
-            },
-            {
-              "id": "jayapal_011",
-              "position": 42,
-              "date": "2023-04-15",
-              "quote": "Nuclear waste storage remains a significant concern that must be addressed before expanding nuclear power.",
-              "source": "Environmental Forum",
-              "sourceUrl": "https://jayapal.house.gov/media/press-releases",
-              "context": "Seattle environmental policy forum",
-              "verified": true
-            },
-            {
-              "id": "jayapal_012",
-              "position": 48,
-              "date": "2022-09-10",
-              "quote": "We should explore all clean energy options, including nuclear, but with robust safety measures and community input.",
-              "source": "Town Hall Q&A",
-              "sourceUrl": "https://jayapal.house.gov/events",
-              "context": "District town hall on energy policy",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 45,
-          "candidateVariability": 6,
-          "alignmentScore": 58
-        },
-        "gmo_safety": {
-          "statements": [
-            {
-              "id": "jayapal_013",
-              "position": 25,
-              "date": "2024-05-15",
-              "quote": "Consumers have a right to know what's in their food through clear GMO labeling, while supporting sustainable agriculture.",
-              "source": "Agriculture Committee",
-              "sourceUrl": "https://www.congress.gov/committee-reports",
-              "context": "House Agriculture Committee hearing on food labeling",
-              "verified": true
-            },
-            {
-              "id": "jayapal_014",
-              "position": 28,
-              "date": "2023-11-08",
-              "quote": "We need more research on long-term effects of GMOs and stronger regulation of agricultural biotechnology.",
-              "source": "Farm Policy Forum",
-              "sourceUrl": "https://jayapal.house.gov/media/press-releases",
-              "context": "Washington state farm policy forum",
-              "verified": true
-            },
-            {
-              "id": "jayapal_015",
-              "position": 22,
-              "date": "2022-08-20",
-              "quote": "Food safety should be paramount, and we should support organic and sustainable farming practices alongside proper GMO oversight.",
-              "source": "Organic Farmers Conference",
-              "sourceUrl": "https://jayapal.house.gov/events",
-              "context": "Pacific Northwest Organic Farmers Conference",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 25,
-          "candidateVariability": 6,
-          "alignmentScore": 68
         }
       }
     },
@@ -251,74 +93,16 @@
       "office": "U.S. House of Representatives",
       "district": "Washington's 7th Congressional District",
       "state": "WA",
-      "overallPattern": "inconsistent",
-      "patternDescription": "Mixed record with strong support for some scientific applications but skepticism of government health mandates.",
+      "overallPattern": "limited-data",
+      "patternDescription": "Limited public climate positions available for verification.",
       "trendData": {
-        "childhood_immunization": [
-          { "date": "2023-06-10", "score": 78 },
-          { "date": "2024-01-20", "score": 72 },
-          { "date": "2024-08-15", "score": 75 }
-        ],
         "climate_change": [
-          { "date": "2024-10-15", "score": 65 },
-          { "date": "2024-11-01", "score": 35 }
-        ],
-        "covid_origins": [
-          { "date": "2023-04-20", "score": 85 },
-          { "date": "2024-03-12", "score": 88 },
-          { "date": "2024-09-05", "score": 87 }
+          { "date": "2024-10-15", "score": 65 }
         ]
       },
       "positions": {
-        "childhood_immunization": {
-          "statements": [
-            {
-              "id": "alexander_001",
-              "position": 75,
-              "date": "2024-08-15",
-              "quote": "Vaccines can be beneficial, but parents should have the ultimate say in their children's medical decisions without government mandates.",
-              "source": "Campaign Rally",
-              "sourceUrl": "https://danalexander2024.com/events",
-              "context": "Campaign rally in Burien, WA",
-              "verified": true
-            },
-            {
-              "id": "alexander_002",
-              "position": 72,
-              "date": "2024-01-20",
-              "quote": "I support vaccine choice and oppose blanket mandates that don't account for individual medical circumstances.",
-              "source": "Candidate Forum",
-              "sourceUrl": "https://danalexander2024.com/positions",
-              "context": "Seattle Times candidate forum",
-              "verified": true
-            },
-            {
-              "id": "alexander_003",
-              "position": 78,
-              "date": "2023-06-10",
-              "quote": "While vaccines have helped reduce disease, we need to respect parental rights and religious exemptions.",
-              "source": "Town Hall",
-              "sourceUrl": "https://danalexander2024.com/media",
-              "context": "West Seattle town hall meeting",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 75,
-          "candidateVariability": 6,
-          "alignmentScore": 65
-        },
         "climate_change": {
           "statements": [
-            {
-              "id": "alexander_climate_001",
-              "position": 35,
-              "date": "2024-11-01",
-              "quote": "Reduce the fear rhetoric associated with climate change issues with innovation and in balance with pro-human practices.",
-              "source": "Campaign Platform Statement",
-              "sourceUrl": "https://ballotpedia.org/Dan_Alexander",
-              "context": "Official campaign platform position on climate change",
-              "verified": true
-            },
             {
               "id": "alexander_climate_002",
               "position": 65,
@@ -330,135 +114,29 @@
               "verified": true
             }
           ],
-          "candidateMedian": 50,
-          "candidateVariability": 30,
-          "alignmentScore": 35
-        },
-        "covid_origins": {
-          "statements": [
-            {
-              "id": "alexander_007",
-              "position": 87,
-              "date": "2024-09-05",
-              "quote": "The evidence strongly suggests COVID-19 escaped from the Wuhan lab, and China must be held accountable for the cover-up.",
-              "source": "Congressional Candidate Debate",
-              "sourceUrl": "https://danalexander2024.com/debates",
-              "context": "KING 5 congressional debate",
-              "verified": true
-            },
-            {
-              "id": "alexander_008",
-              "position": 88,
-              "date": "2024-03-12",
-              "quote": "It's obvious this virus was engineered in a Chinese lab and then covered up by the CCP and their allies.",
-              "source": "Campaign Statement",
-              "sourceUrl": "https://danalexander2024.com/statements",
-              "context": "Campaign press release on pandemic accountability",
-              "verified": true
-            },
-            {
-              "id": "alexander_009",
-              "position": 85,
-              "date": "2023-04-20",
-              "quote": "The lab leak theory is not a conspiracy - it's the most logical explanation given the evidence and China's behavior.",
-              "source": "Podcast Interview",
-              "sourceUrl": "https://danalexander2024.com/media",
-              "context": "Conservative podcast appearance",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 87,
-          "candidateVariability": 3,
-          "alignmentScore": 25
-        },
-        "nuclear_energy": {
-          "statements": [
-            {
-              "id": "alexander_010",
-              "position": 88,
-              "date": "2024-06-30",
-              "quote": "Nuclear energy is clean, reliable, and essential for American energy independence. We should be building more plants, not shutting them down.",
-              "source": "Energy Policy Speech",
-              "sourceUrl": "https://danalexander2024.com/positions",
-              "context": "Campaign policy speech on energy independence",
-              "verified": true
-            },
-            {
-              "id": "alexander_011",
-              "position": 85,
-              "date": "2024-04-18",
-              "quote": "Modern nuclear technology is incredibly safe. France gets 70% of their power from nuclear - we should follow their lead.",
-              "source": "Business Roundtable",
-              "sourceUrl": "https://danalexander2024.com/events",
-              "context": "Seattle business leaders roundtable",
-              "verified": true
-            },
-            {
-              "id": "alexander_012",
-              "position": 90,
-              "date": "2023-09-22",
-              "quote": "Nuclear power is the best clean energy source we have. Environmental extremists who oppose it are hypocrites.",
-              "source": "Town Hall Q&A",
-              "sourceUrl": "https://danalexander2024.com/events",
-              "context": "Georgetown town hall meeting",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 88,
-          "candidateVariability": 5,
-          "alignmentScore": 88
-        },
-        "gmo_safety": {
-          "statements": [
-            {
-              "id": "alexander_013",
-              "position": 15,
-              "date": "2024-07-10",
-              "quote": "GMOs are safe and help feed the world. Farmers should have the freedom to use the best technology available.",
-              "source": "Agriculture Forum",
-              "sourceUrl": "https://danalexander2024.com/events",
-              "context": "Washington Farm Bureau candidate forum",
-              "verified": true
-            },
-            {
-              "id": "alexander_014",
-              "position": 18,
-              "date": "2024-03-25",
-              "quote": "Anti-GMO activism is anti-science and hurts both farmers and consumers who benefit from improved crops.",
-              "source": "Rural Communities Rally",
-              "sourceUrl": "https://danalexander2024.com/media",
-              "context": "Rural Washington campaign event",
-              "verified": true
-            },
-            {
-              "id": "alexander_015",
-              "position": 12,
-              "date": "2023-11-15",
-              "quote": "GMO crops are thoroughly tested and have been safely consumed for decades. The science is settled on their safety.",
-              "source": "Tech Industry Forum",
-              "sourceUrl": "https://danalexander2024.com/positions",
-              "context": "Seattle tech industry candidate forum",
-              "verified": true
-            }
-          ],
-          "candidateMedian": 15,
-          "candidateVariability": 6,
-          "alignmentScore": 88
+          "candidateMedian": 65,
+          "candidateVariability": 0,
+          "alignmentScore": 45
         }
       }
     }
   },
   "metadata": {
-    "version": "1.1",
+    "version": "1.3",
     "lastUpdated": "2024-08-14",
     "totalCandidates": 2,
-    "dataQuality": "verified_statements",
-    "methodology": "Climate change positions based on verified public statements, congressional records, and official press releases from 2023-2024. All statements fact-checked and sourced. Scores represent alignment with scientific consensus on 0-100 scale.",
+    "dataQuality": "climate_verified_only",
+    "methodology": "Climate change positions only, based on verified public statements, congressional records, and official press releases from 2023-2024. All statements fact-checked against original sources. Scores represent alignment with scientific consensus on 0-100 scale.",
     "election": "2024 U.S. House of Representatives - Washington District 7",
+    "focus": "Climate change statements exclusively - all other scientific topics removed for data quality",
     "verificationStatus": {
-      "jayapal_climate": "6 statements verified from official House press releases and congressional records",
-      "alexander_climate": "2 statements verified from campaign platform and professional background"
+      "jayapal_climate": "6 statements verified against official House press release sources - all quotes confirmed accurate",
+      "alexander_climate": "1 statement verified (professional background only) - unverifiable quote removed"
     },
-    "notes": "Climate data updated with real web-researched statements. Jayapal: Strong legislative record with detailed quotes. Alexander: Limited campaign materials available, supplemented with professional background."
+    "dataIssuesResolved": {
+      "alexander_climate_001": "REMOVED - 'fear rhetoric' quote could not be verified from cited Ballotpedia source",
+      "jayapal_quotes_adjusted": "2 quotes updated to match exact wording from verified sources"
+    },
+    "notes": "Streamlined to climate-only focus with rigorous fact-checking. Jayapal: 6 verified statements from congressional sources. Alexander: Only 1 verifiable statement (clean energy company background) retained."
   }
 }
