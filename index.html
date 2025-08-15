@@ -102,7 +102,7 @@
             flex-wrap: wrap;
         }
         
-        .candidate-selector select, .date-filter select {
+        .candidate-selector select, .date-filter select, .data-source-filter select {
             padding: 12px 20px;
             font-size: 16px;
             border: 2px solid #3498db;
@@ -111,6 +111,17 @@
             color: #2c3e50;
             cursor: pointer;
             min-width: 200px;
+        }
+        
+        .data-source-filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .data-source-filter label {
+            font-weight: 600;
+            color: #2c3e50;
         }
         
         .date-filter {
@@ -823,6 +834,14 @@
         <!-- Candidate Analysis Tab -->
         <div class="tab-content active" id="candidate-analysis">
             <div class="candidate-selector">
+                <div class="data-source-filter">
+                    <label for="dataSourceFilter">Data source:</label>
+                    <select id="dataSourceFilter">
+                        <option value="mock">Mock Data (Demo)</option>
+                        <option value="real">Real Data (2024 WA-7)</option>
+                    </select>
+                </div>
+                
                 <select id="candidateSelect">
                     <option value="">Loading candidates...</option>
                 </select>
@@ -1016,16 +1035,21 @@
         let ballotData = {};
 
         // Data loading functions
-        async function loadData() {
+        async function loadData(dataSource = 'mock') {
             try {
-                // Load JSON data files (they're in the root directory, one level up)
+                // Determine which candidate data file to use
+                const candidateFile = dataSource === 'real' ? 'candidate-data-real.json' : 'candidate-data.json';
+                
+                // Load JSON data files
                 const [consensusResponse, candidateResponse] = await Promise.all([
-                    fetch('../scientific-consensus.json'),
-                    fetch('../candidate-data.json')
+                    fetch('scientific-consensus.json'),
+                    fetch(candidateFile)
                 ]);
                 
                 if (!consensusResponse.ok || !candidateResponse.ok) {
-                    throw new Error('Failed to load data files');
+                    const consensusError = !consensusResponse.ok ? `consensus: ${consensusResponse.status} ${consensusResponse.statusText}` : '';
+                    const candidateError = !candidateResponse.ok ? `candidate: ${candidateResponse.status} ${candidateResponse.statusText}` : '';
+                    throw new Error(`Failed to load data files - ${consensusError} ${candidateError}`);
                 }
                 
                 scientificConsensus = await consensusResponse.json();
@@ -1037,13 +1061,21 @@
                 // Initialize ballot data (this would typically come from an API)
                 initializeBallotData();
                 
+                // Update UI to reflect data source
+                showNotification(`Loaded ${dataSource === 'real' ? 'real' : 'demo'} candidate data successfully`, 'success');
+                
                 return true;
             } catch (error) {
                 console.error('Error loading data:', error);
                 console.log('Falling back to embedded demo data');
                 
-                // Show user-friendly message
-                showNotification('Unable to load data files. Using demo data instead.', 'error');
+                // Show user-friendly message with more context
+                const isFileProtocol = window.location.protocol === 'file:';
+                const errorMsg = isFileProtocol 
+                    ? `Unable to load ${dataSource} data files due to CORS restrictions. Please run a local server or open via HTTP. Using demo data instead.`
+                    : `Unable to load ${dataSource} data files. Error: ${error.message}. Using demo data instead.`;
+                
+                showNotification(errorMsg, 'error');
                 
                 // Fallback to hardcoded data if JSON files fail to load
                 loadFallbackData();
@@ -2071,6 +2103,30 @@
             switchCandidate(); // Re-render with new filter
         }
 
+        async function switchDataSource() {
+            const selectedSource = document.getElementById('dataSourceFilter').value;
+            
+            // Show loading state
+            showNotification('Loading data...', 'info');
+            
+            // Reload data with selected source
+            await loadData(selectedSource);
+            
+            // Update candidate selector with new data
+            populateCandidateSelector();
+            
+            // Reset to first candidate or clear selection
+            const candidateSelect = document.getElementById('candidateSelect');
+            if (candidateSelect.options.length > 0) {
+                candidateSelect.selectedIndex = 0;
+                currentCandidate = candidateSelect.value;
+                switchCandidate();
+            } else {
+                // Clear display if no candidates available
+                document.getElementById('candidate-analysis').innerHTML = '<p>No candidates available in selected data source.</p>';
+            }
+        }
+
         function lookupBallot() {
             const address = document.getElementById('address').value;
             const city = document.getElementById('city').value;
@@ -2184,6 +2240,7 @@
                 // Set up event listeners
                 document.getElementById('candidateSelect').addEventListener('change', switchCandidate);
                 document.getElementById('dateFilter').addEventListener('change', updateDateFilter);
+                document.getElementById('dataSourceFilter').addEventListener('change', switchDataSource);
                 
                 // Close modal when clicking outside
                 document.getElementById('shareModal').addEventListener('click', (e) => {
