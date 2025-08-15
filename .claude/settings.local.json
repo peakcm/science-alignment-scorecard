@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:gallegoforarizona.com)",
+      "WebFetch(domain:rubengallego.house.gov)",
+      "WebFetch(domain:www.politifact.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
