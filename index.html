@@ -243,42 +243,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
-        .trend-analysis {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-        
-        .trend-chart {
-            width: 100%;
-            height: 200px;
-            margin: 15px 0;
-        }
-        
-        .trend-summary {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .trend-item {
-            flex: 1;
-            min-width: 120px;
-            text-align: center;
-            padding: 12px;
-            background: white;
-            border-radius: 8px;
-        }
-        
-        .trend-arrow {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-        
-        .trend-arrow.up { color: #27ae60; }
-        .trend-arrow.down { color: #e74c3c; }
-        .trend-arrow.stable { color: #7f8c8d; }
         
         .email-signup {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -714,10 +678,15 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s ease;
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
         }
         
         .tooltip.show {
             opacity: 1;
+            pointer-events: auto;
         }
         
         .tooltip h4 {
@@ -875,15 +844,6 @@
             
             <div class="scorecard">
                 <div class="topics-section">
-                    <!-- Trend Analysis -->
-                    <div class="trend-analysis" id="trendAnalysis">
-                        <h3>📈 Position Trends Over Time</h3>
-                        <div class="trend-chart" id="trendChart"></div>
-                        <div class="trend-summary" id="trendSummary">
-                            <!-- Trend items will be populated here -->
-                        </div>
-                    </div>
-
                     <div id="topicsList"></div>
                 </div>
                 
@@ -990,10 +950,6 @@
                     <h4>Alignment Calculation</h4>
                     <p>Alignment scores measure overlap between candidate statement distributions and scientific consensus distributions. Accounts for both position and consistency.</p>
                 </div>
-                <div class="methodology-item">
-                    <h4>Trend Analysis</h4>
-                    <p>Consistency patterns identify whether candidates are improving, declining, or maintaining positions over time. Distinguishes evidence-based updates from political opportunism.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -1094,7 +1050,6 @@
                     office: candidate.office,
                     overallPattern: candidate.overallPattern,
                     patternDescription: candidate.patternDescription,
-                    trendData: candidate.trendData || {},
                     topics: []
                 };
                 
@@ -1153,23 +1108,6 @@
                 office: "U.S. Senate",
                 overallPattern: "consistently-right",
                 patternDescription: "High alignment with scientific consensus across most topics.",
-                trendData: {
-                    "vaccines": [
-                        { date: "2023-07-10", score: 95 },
-                        { date: "2023-09-20", score: 92 },
-                        { date: "2024-01-15", score: 98 }
-                    ],
-                    "climate": [
-                        { date: "2023-08-22", score: 94 },
-                        { date: "2023-11-15", score: 89 },
-                        { date: "2024-02-01", score: 96 }
-                    ],
-                    "covid_origins": [
-                        { date: "2023-06-05", score: 30 },
-                        { date: "2023-10-12", score: 40 },
-                        { date: "2024-01-30", score: 35 }
-                    ]
-                },
                 topics: [
                     {
                         statement: "Childhood immunization saves lives and prevents serious diseases",
@@ -1264,23 +1202,6 @@
                 office: "U.S. Senate",
                 overallPattern: "inconsistent",
                 patternDescription: "Mixed record with some strong alignments and some significant departures from consensus.",
-                trendData: {
-                    "vaccines": [
-                        { date: "2023-07-20", score: 75 },
-                        { date: "2023-10-05", score: 60 },
-                        { date: "2024-01-10", score: 85 }
-                    ],
-                    "climate": [
-                        { date: "2023-09-12", score: 20 },
-                        { date: "2023-11-08", score: 30 },
-                        { date: "2024-02-15", score: 25 }
-                    ],
-                    "covid_origins": [
-                        { date: "2023-06-18", score: 82 },
-                        { date: "2023-09-30", score: 88 },
-                        { date: "2024-01-25", score: 85 }
-                    ]
-                },
                 topics: [
                     {
                         statement: "Childhood immunization saves lives and prevents serious diseases",
@@ -1375,23 +1296,6 @@
                 office: "Governor",
                 overallPattern: "improving",
                 patternDescription: "Generally strong alignment with some evolution toward better scientific positions over time.",
-                trendData: {
-                    "vaccines": [
-                        { date: "2023-07-15", score: 85 },
-                        { date: "2023-10-20", score: 88 },
-                        { date: "2024-02-05", score: 96 }
-                    ],
-                    "climate": [
-                        { date: "2023-08-05", score: 92 },
-                        { date: "2023-12-10", score: 94 },
-                        { date: "2024-03-01", score: 98 }
-                    ],
-                    "covid_origins": [
-                        { date: "2023-05-28", score: 25 },
-                        { date: "2023-09-15", score: 32 },
-                        { date: "2024-01-20", score: 28 }
-                    ]
-                },
                 topics: [
                     {
                         statement: "Childhood immunization saves lives and prevents serious diseases",
@@ -1805,43 +1709,6 @@
             closeShareModal();
         }
 
-        function renderTrendAnalysis(candidateData) {
-            const trendContainer = document.getElementById('trendSummary');
-            trendContainer.innerHTML = '';
-            
-            const topics = ['vaccines', 'climate', 'covid_origins'];
-            
-            topics.forEach(topic => {
-                const trendData = candidateData.trendData[topic];
-                if (!trendData || trendData.length < 2) return;
-                
-                const firstScore = trendData[0].score;
-                const lastScore = trendData[trendData.length - 1].score;
-                const change = lastScore - firstScore;
-                
-                let trendDirection, arrow;
-                if (Math.abs(change) < 3) {
-                    trendDirection = 'stable';
-                    arrow = '➡️';
-                } else if (change > 0) {
-                    trendDirection = 'up';
-                    arrow = '⬆️';
-                } else {
-                    trendDirection = 'down';
-                    arrow = '⬇️';
-                }
-                
-                const trendItem = document.createElement('div');
-                trendItem.className = 'trend-item';
-                trendItem.innerHTML = `
-                    <div class="trend-arrow ${trendDirection}">${arrow}</div>
-                    <div style="font-size: 0.9em; font-weight: 600; text-transform: capitalize;">${topic.replace('_', ' ')}</div>
-                    <div style="font-size: 0.8em; color: #7f8c8d;">${change > 0 ? '+' : ''}${change.toFixed(1)} pts</div>
-                `;
-                
-                trendContainer.appendChild(trendItem);
-            });
-        }
 
         function showNotification(message, type = 'success') {
             const notification = document.createElement('div');
@@ -1920,15 +1787,39 @@
             return labels[pattern] || 'Mixed Record';
         }
 
+        let hideTooltipTimer = null;
+
         function showTooltip(e, content) {
+            // Clear any existing hide timer
+            if (hideTooltipTimer) {
+                clearTimeout(hideTooltipTimer);
+                hideTooltipTimer = null;
+            }
+
             tooltip.innerHTML = content;
             tooltip.style.left = (e.pageX + 10) + 'px';
             tooltip.style.top = (e.pageY - 10) + 'px';
             tooltip.classList.add('show');
+
+            // Add event listeners to keep tooltip open when cursor is inside
+            tooltip.addEventListener('mouseenter', function() {
+                if (hideTooltipTimer) {
+                    clearTimeout(hideTooltipTimer);
+                    hideTooltipTimer = null;
+                }
+            });
+
+            tooltip.addEventListener('mouseleave', function() {
+                hideTooltip();
+            });
         }
 
         function hideTooltip() {
-            tooltip.classList.remove('show');
+            // Add a small delay before hiding to allow cursor to move to tooltip
+            hideTooltipTimer = setTimeout(() => {
+                tooltip.classList.remove('show');
+                hideTooltipTimer = null;
+            }, 200);
         }
 
         function filterStatementsByDate(statements, filterType) {
@@ -2014,11 +1905,13 @@
                 
                 point.addEventListener('mouseenter', (e) => {
                     const stmt = JSON.parse(e.target.dataset.statement);
+                    const sourceUrl = stmt.sourceUrl || stmt.url || '#';
                     const content = `
                         <h4>Statement (Score: ${stmt.position})</h4>
                         <div class="quote">"${stmt.quote}"</div>
                         <p><strong>Date:</strong> ${stmt.date}</p>
-                        <div class="source"><strong>Source:</strong> <a href="${stmt.url}" target="_blank">${stmt.source}</a></div>
+                        <div class="source"><strong>Source:</strong> <a href="${sourceUrl}" target="_blank" rel="noopener">${stmt.source}</a></div>
+                        ${stmt.context ? `<p><strong>Context:</strong> ${stmt.context}</p>` : ''}
                         ${isFiltered ? '<p style="color: #f39c12;"><strong>Filtered out by date range</strong></p>' : ''}
                     `;
                     showTooltip(e, content);
@@ -2095,7 +1988,6 @@
             
             renderTopics(candidateData);
             updateOverallScore(candidateData);
-            renderTrendAnalysis(candidateData);
         }
 
         function updateDateFilter() {
