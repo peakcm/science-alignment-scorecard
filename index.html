@@ -190,6 +190,7 @@
         .inconsistent { background: #f39c12; }
         .improving { background: #3498db; }
         .declining { background: #e67e22; }
+        .limited-data { background: #95a5a6; }
         
         /* Advanced Features */
         .export-controls {
@@ -2239,21 +2240,25 @@
         function getPatternClass(pattern) {
             const classes = {
                 'consistently-right': 'consistently-right',
+                'consistently-correct': 'consistently-right',
                 'consistently-wrong': 'consistently-wrong', 
                 'inconsistent': 'inconsistent',
                 'improving': 'improving',
-                'declining': 'declining'
+                'declining': 'declining',
+                'limited-data': 'limited-data'
             };
             return classes[pattern] || 'inconsistent';
         }
         
         function getPatternLabel(pattern) {
             const labels = {
-                'consistently-right': 'Consistently Right',
+                'consistently-right': 'Consistently Correct',
+                'consistently-correct': 'Consistently Correct',
                 'consistently-wrong': 'Consistently Wrong',
                 'inconsistent': 'Inconsistent',
                 'improving': 'Improving',
-                'declining': 'Declining'
+                'declining': 'Declining',
+                'limited-data': 'Limited Data'
             };
             return labels[pattern] || 'Mixed Record';
         }
