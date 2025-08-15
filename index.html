@@ -496,6 +496,61 @@
             border-color: #3498db;
         }
         
+        /* Autocomplete Styles */
+        .autocomplete-container {
+            position: relative;
+        }
+        
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #3498db;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .autocomplete-dropdown.show {
+            display: block;
+        }
+        
+        .autocomplete-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: background-color 0.2s ease;
+        }
+        
+        .autocomplete-option:hover,
+        .autocomplete-option.highlighted {
+            background: #f8f9fa;
+            color: #3498db;
+        }
+        
+        .autocomplete-option:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-option strong {
+            color: #2c3e50;
+        }
+        
+        .autocomplete-no-results {
+            padding: 12px 15px;
+            color: #7f8c8d;
+            font-style: italic;
+            text-align: center;
+        }
+        
         .lookup-btn {
             padding: 12px 25px;
             background: #3498db;
@@ -1003,17 +1058,19 @@
                     <p>Enter your address to see science alignment scores for candidates on your ballot</p>
                     
                     <div class="address-form">
-                        <div class="form-group">
+                        <div class="form-group autocomplete-container">
                             <label for="address">Street Address</label>
-                            <input type="text" id="address" placeholder="123 Main St">
+                            <input type="text" id="address" placeholder="123 Main St" autocomplete="street-address">
+                            <div class="autocomplete-dropdown" id="addressDropdown"></div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group autocomplete-container">
                             <label for="city">City</label>
-                            <input type="text" id="city" placeholder="Seattle">
+                            <input type="text" id="city" placeholder="Seattle" autocomplete="address-level2">
+                            <div class="autocomplete-dropdown" id="cityDropdown"></div>
                         </div>
                         <div class="form-group">
                             <label for="state">State</label>
-                            <select id="state">
+                            <select id="state" autocomplete="address-level1">
                                 <option value="">Select State</option>
                                 <option value="WA">Washington</option>
                                 <option value="CA">California</option>
@@ -1037,9 +1094,10 @@
                                 <option value="MN">Minnesota</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group autocomplete-container">
                             <label for="zip">ZIP Code</label>
-                            <input type="text" id="zip" placeholder="98101">
+                            <input type="text" id="zip" placeholder="98101" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}">
+                            <div class="autocomplete-dropdown" id="zipDropdown"></div>
                         </div>
                         <button class="lookup-btn" onclick="lookupBallot()">Find My Ballot</button>
                     </div>
@@ -1862,6 +1920,172 @@
             return emailRegex.test(email);
         }
 
+        // Address Autofill Data and Functions
+        const addressData = {
+            streets: [
+                "Main St", "First St", "Second St", "Third St", "Park Ave", "Oak St", "Maple St",
+                "Washington St", "Lincoln Ave", "Jefferson St", "Madison Ave", "Roosevelt Blvd",
+                "Church St", "School St", "High St", "Elm St", "Cedar St", "Pine St", "Walnut St",
+                "Chestnut St", "Spring St", "Franklin St", "Jackson Ave", "Adams St", "Union St",
+                "Market St", "Center St", "Water St", "Mill St", "Bridge St", "College Ave",
+                "University Ave", "Broadway", "Fifth Ave", "Sixth Ave", "Seventh Ave", "Eighth Ave"
+            ],
+            cities: {
+                "WA": ["Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue", "Everett", "Kent", "Renton", "Yakima", "Federal Way"],
+                "CA": ["Los Angeles", "San Francisco", "San Diego", "Oakland", "Sacramento", "Long Beach", "Fresno", "Santa Ana", "Anaheim", "Riverside"],
+                "NY": ["New York", "Buffalo", "Rochester", "Yonkers", "Syracuse", "Albany", "New Rochelle", "Mount Vernon", "Schenectady", "Utica"],
+                "TX": ["Houston", "San Antonio", "Dallas", "Austin", "Fort Worth", "El Paso", "Arlington", "Corpus Christi", "Plano", "Lubbock"],
+                "FL": ["Jacksonville", "Miami", "Tampa", "Orlando", "St. Petersburg", "Hialeah", "Tallahassee", "Fort Lauderdale", "Port St. Lucie", "Cape Coral"],
+                "IL": ["Chicago", "Aurora", "Rockford", "Joliet", "Naperville", "Springfield", "Peoria", "Elgin", "Waukegan", "Cicero"],
+                "PA": ["Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading", "Scranton", "Bethlehem", "Lancaster", "Harrisburg", "Altoona"],
+                "OH": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron", "Dayton", "Parma", "Canton", "Youngstown", "Lorain"],
+                "AZ": ["Phoenix", "Tucson", "Mesa", "Chandler", "Glendale", "Scottsdale", "Gilbert", "Tempe", "Peoria", "Surprise"]
+            },
+            zipCodes: {
+                "WA": ["98101", "98102", "98103", "98104", "98105", "98106", "98107", "98108", "98109", "98110"],
+                "CA": ["90210", "90211", "90212", "90213", "90214", "90215", "90001", "90002", "90003", "90004"],
+                "NY": ["10001", "10002", "10003", "10004", "10005", "10006", "10007", "10008", "10009", "10010"],
+                "TX": ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010"],
+                "FL": ["33101", "33102", "33103", "33104", "33105", "33106", "33107", "33108", "33109", "33110"],
+                "AZ": ["85001", "85002", "85003", "85004", "85005", "85006", "85007", "85008", "85009", "85010"]
+            }
+        };
+
+        function setupAutocomplete(inputId, dropdownId, dataSource) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            let highlightedIndex = -1;
+            
+            if (!input || !dropdown) return;
+
+            input.addEventListener('input', function() {
+                const value = this.value.trim().toLowerCase();
+                
+                if (value.length < 1) {
+                    hideDropdown();
+                    return;
+                }
+                
+                let suggestions = [];
+                
+                if (inputId === 'address') {
+                    suggestions = addressData.streets.filter(street => 
+                        street.toLowerCase().includes(value)
+                    ).map(street => `123 ${street}`); // Add sample house numbers
+                } else if (inputId === 'city') {
+                    const selectedState = document.getElementById('state').value;
+                    if (selectedState && addressData.cities[selectedState]) {
+                        suggestions = addressData.cities[selectedState].filter(city =>
+                            city.toLowerCase().includes(value)
+                        );
+                    } else {
+                        // Search all cities if no state selected
+                        suggestions = Object.values(addressData.cities).flat().filter(city =>
+                            city.toLowerCase().includes(value)
+                        );
+                    }
+                } else if (inputId === 'zip') {
+                    const selectedState = document.getElementById('state').value;
+                    if (selectedState && addressData.zipCodes[selectedState]) {
+                        suggestions = addressData.zipCodes[selectedState].filter(zip =>
+                            zip.startsWith(value)
+                        );
+                    } else {
+                        // Search all ZIP codes if no state selected
+                        suggestions = Object.values(addressData.zipCodes).flat().filter(zip =>
+                            zip.startsWith(value)
+                        );
+                    }
+                }
+                
+                showSuggestions(suggestions.slice(0, 8)); // Limit to 8 suggestions
+            });
+
+            input.addEventListener('keydown', function(e) {
+                const options = dropdown.querySelectorAll('.autocomplete-option');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    highlightedIndex = Math.min(highlightedIndex + 1, options.length - 1);
+                    updateHighlight();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    highlightedIndex = Math.max(highlightedIndex - 1, -1);
+                    updateHighlight();
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (highlightedIndex >= 0 && options[highlightedIndex]) {
+                        selectOption(options[highlightedIndex].textContent);
+                    }
+                } else if (e.key === 'Escape') {
+                    hideDropdown();
+                }
+            });
+
+            input.addEventListener('blur', function() {
+                // Small delay to allow click on dropdown option
+                setTimeout(() => hideDropdown(), 200);
+            });
+
+            function showSuggestions(suggestions) {
+                if (suggestions.length === 0) {
+                    hideDropdown();
+                    return;
+                }
+
+                dropdown.innerHTML = '';
+                highlightedIndex = -1;
+                
+                suggestions.forEach(suggestion => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-option';
+                    option.textContent = suggestion;
+                    option.addEventListener('click', () => selectOption(suggestion));
+                    dropdown.appendChild(option);
+                });
+                
+                dropdown.classList.add('show');
+            }
+
+            function hideDropdown() {
+                dropdown.classList.remove('show');
+                highlightedIndex = -1;
+            }
+
+            function updateHighlight() {
+                const options = dropdown.querySelectorAll('.autocomplete-option');
+                options.forEach((option, index) => {
+                    option.classList.toggle('highlighted', index === highlightedIndex);
+                });
+            }
+
+            function selectOption(value) {
+                input.value = value;
+                hideDropdown();
+                
+                // Auto-populate related fields when address is selected
+                if (inputId === 'city') {
+                    autoPopulateFromCity(value);
+                }
+            }
+        }
+
+        function autoPopulateFromCity(cityName) {
+            // Auto-select state when city is chosen
+            for (const [state, cities] of Object.entries(addressData.cities)) {
+                if (cities.includes(cityName)) {
+                    document.getElementById('state').value = state;
+                    break;
+                }
+            }
+        }
+
+        function initializeAutocomplete() {
+            setupAutocomplete('address', 'addressDropdown', 'streets');
+            setupAutocomplete('city', 'cityDropdown', 'cities');
+            setupAutocomplete('zip', 'zipDropdown', 'zipCodes');
+        }
+
         // Candidate Comparison Functions
         function getElectionsFromCandidates() {
             const elections = new Map();
@@ -2375,6 +2599,9 @@
                 
                 // Initialize UI
                 init();
+                
+                // Initialize autocomplete functionality
+                initializeAutocomplete();
                 
                 // Populate candidate selector
                 populateCandidateSelector();
