@@ -30,7 +30,7 @@ A tool for measuring how well a public individual aligns with scientific consens
 
 ## 🌐 Live Demo
 
-Visit: https://yourusername.github.io/science-alignment-scorecard/
+Visit: https://peakcm.github.io/science-alignment-scorecard/
 
 ## 🤝 Contributing
 
