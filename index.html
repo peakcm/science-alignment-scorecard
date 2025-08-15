@@ -339,6 +339,110 @@
             color: #7f8c8d;
         }
         
+        /* Candidate Comparison Tab */
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .election-selector {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .election-selector label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        
+        .election-selector select {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            background: white;
+            color: #2c3e50;
+            cursor: pointer;
+            min-width: 300px;
+        }
+        
+        .comparison-table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+            border-top: 3px solid #3498db;
+        }
+        
+        .comparison-table td {
+            vertical-align: middle;
+        }
+        
+        .topic-name {
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 200px;
+        }
+        
+        .score-cell {
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .score-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: white;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .score-high { background: #27ae60; }
+        .score-medium { background: #f39c12; }
+        .score-low { background: #e74c3c; }
+        
+        .candidate-header {
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .candidate-party {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        .no-election-selected {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 40px;
+        }
+        
         /* Ballot Lookup Tab */
         .ballot-lookup {
             max-width: 800px;
@@ -797,6 +901,7 @@
         
         <div class="tabs">
             <button class="tab active" data-tab="candidate-analysis">Candidate Analysis</button>
+            <button class="tab" data-tab="candidate-comparison">Head-to-Head</button>
             <button class="tab" data-tab="ballot-lookup">My Ballot</button>
         </div>
         
@@ -867,6 +972,25 @@
                             <button onclick="subscribeToUpdates()">Subscribe</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Candidate Comparison Tab -->
+        <div class="tab-content" id="candidate-comparison">
+            <div class="comparison-container">
+                <h2>🆚 Head-to-Head Comparison</h2>
+                <p>Compare candidates side-by-side across scientific topics</p>
+                
+                <div class="election-selector">
+                    <label for="electionSelect">Select Election:</label>
+                    <select id="electionSelect">
+                        <option value="">Choose an election...</option>
+                    </select>
+                </div>
+                
+                <div class="comparison-table-container" id="comparisonTableContainer">
+                    <!-- Comparison table will be populated here -->
                 </div>
             </div>
         </div>
@@ -1738,6 +1862,129 @@
             return emailRegex.test(email);
         }
 
+        // Candidate Comparison Functions
+        function getElectionsFromCandidates() {
+            const elections = new Map();
+            
+            Object.values(candidates).forEach(candidate => {
+                const electionKey = `${candidate.state}_${candidate.office}`;
+                const electionName = `${candidate.state} ${candidate.office}${candidate.district ? ` - ${candidate.district}` : ''}`;
+                
+                if (!elections.has(electionKey)) {
+                    elections.set(electionKey, {
+                        key: electionKey,
+                        name: electionName,
+                        candidates: []
+                    });
+                }
+                elections.get(electionKey).candidates.push(candidate);
+            });
+            
+            return Array.from(elections.values());
+        }
+
+        function populateElectionSelector() {
+            const selector = document.getElementById('electionSelect');
+            selector.innerHTML = '<option value="">Choose an election...</option>';
+            
+            const elections = getElectionsFromCandidates();
+            
+            elections.forEach(election => {
+                const option = document.createElement('option');
+                option.value = election.key;
+                option.textContent = election.name;
+                selector.appendChild(option);
+            });
+        }
+
+        function getScoreClass(score) {
+            if (score >= 80) return 'score-high';
+            if (score >= 40) return 'score-medium';
+            return 'score-low';
+        }
+
+        function renderComparisonTable(electionKey) {
+            const container = document.getElementById('comparisonTableContainer');
+            
+            if (!electionKey) {
+                container.innerHTML = '<div class="no-election-selected">Please select an election to compare candidates.</div>';
+                return;
+            }
+            
+            const elections = getElectionsFromCandidates();
+            const election = elections.find(e => e.key === electionKey);
+            
+            if (!election || election.candidates.length < 2) {
+                container.innerHTML = '<div class="no-election-selected">No comparison data available for this election.</div>';
+                return;
+            }
+            
+            // Get all unique topics across candidates
+            const allTopics = new Set();
+            election.candidates.forEach(candidate => {
+                candidate.topics.forEach(topic => {
+                    allTopics.add(topic.statement);
+                });
+            });
+            
+            if (allTopics.size === 0) {
+                container.innerHTML = '<div class="no-election-selected">No scientific topics found for these candidates.</div>';
+                return;
+            }
+            
+            // Build comparison table
+            let tableHTML = `
+                <h3>🗳️ ${election.name}</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="topic-name">Scientific Topic</th>
+            `;
+            
+            // Add candidate headers
+            election.candidates.forEach(candidate => {
+                tableHTML += `
+                    <th class="candidate-header">
+                        ${candidate.name}
+                        <div class="candidate-party">(${candidate.party})</div>
+                    </th>
+                `;
+            });
+            
+            tableHTML += `</tr></thead><tbody>`;
+            
+            // Add rows for each topic
+            Array.from(allTopics).forEach(topicStatement => {
+                tableHTML += `<tr><td class="topic-name">${topicStatement}</td>`;
+                
+                election.candidates.forEach(candidate => {
+                    const topic = candidate.topics.find(t => t.statement === topicStatement);
+                    
+                    if (topic) {
+                        const score = topic.alignmentScore || topic.candidateMedian || 0;
+                        const scoreClass = getScoreClass(score);
+                        tableHTML += `
+                            <td class="score-cell">
+                                <span class="score-badge ${scoreClass}">${score}</span>
+                            </td>
+                        `;
+                    } else {
+                        tableHTML += '<td class="score-cell">—</td>';
+                    }
+                });
+                
+                tableHTML += '</tr>';
+            });
+            
+            tableHTML += '</tbody></table>';
+            container.innerHTML = tableHTML;
+        }
+
+        function switchElection() {
+            const selectedElection = document.getElementById('electionSelect').value;
+            renderComparisonTable(selectedElection);
+        }
+
         function init() {
             tooltip = document.getElementById('tooltip');
             
@@ -2007,6 +2254,9 @@
             // Update candidate selector with new data
             populateCandidateSelector();
             
+            // Update election selector with new data
+            populateElectionSelector();
+            
             // Reset to first candidate or clear selection
             const candidateSelect = document.getElementById('candidateSelect');
             if (candidateSelect.options.length > 0) {
@@ -2129,10 +2379,14 @@
                 // Populate candidate selector
                 populateCandidateSelector();
                 
+                // Populate election selector for comparison tab
+                populateElectionSelector();
+                
                 // Set up event listeners
                 document.getElementById('candidateSelect').addEventListener('change', switchCandidate);
                 document.getElementById('dateFilter').addEventListener('change', updateDateFilter);
                 document.getElementById('dataSourceFilter').addEventListener('change', switchDataSource);
+                document.getElementById('electionSelect').addEventListener('change', switchElection);
                 
                 // Close modal when clicking outside
                 document.getElementById('shareModal').addEventListener('click', (e) => {
