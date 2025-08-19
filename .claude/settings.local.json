@@ -5,10 +5,14 @@
       "WebFetch(domain:gallegoforarizona.com)",
       "WebFetch(domain:rubengallego.house.gov)",
       "WebFetch(domain:www.politifact.com)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": [],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\Users\\coreype\\OneDrive - Bill & Melinda Gates Foundation\\Documents\\GitHub\\cvdpv1-3"
+    ]
   }
 }

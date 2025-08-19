@@ -33,6 +33,37 @@
             padding: 20px;
         }
         
+        .disclaimer-banner {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 0 auto 20px auto;
+            max-width: 1400px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .disclaimer-banner h3 {
+            color: #856404;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .disclaimer-banner h3::before {
+            content: "⚠️";
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        
+        .disclaimer-banner p {
+            color: #856404;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -949,6 +980,11 @@
     </style>
 </head>
 <body>
+    <div class="disclaimer-banner">
+        <h3>Experimental Learning Tool</h3>
+        <p><strong>Important Notice:</strong> This is an experimental project designed as a learning tool for coding and data analysis practice. It uses mock/demo data sources and simplified methodologies. The analysis, scores, and conclusions presented here are for demonstration purposes only and do not reflect the opinions, views, or official positions of any individual, organization, political party, or institution. This tool should not be used for making real-world political decisions or assessments.</p>
+    </div>
+    
     <div class="container">
         <div class="header">
             <h1>🔬 Science Alignment Scorecard</h1>

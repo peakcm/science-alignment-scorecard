@@ -1,1 +1,17 @@
-1. Revise methods for calculating and documenting scientific consensus
+1. Revise methods for calculating and documenting scientific consensus.
+	1a. Add a metric for how influential a certain source is
+	1b. Document actual equation and methods
+	1c. Specify which sources to look into, such as cochrane reviews, WHO, IPCC
+2. Add a check for bias
+	2a. Option 1 is to create a panel of statements/documents which have placeholders for the person's name.
+		Run the analysis with a made up a name as well as with a real name and ensure the score is based on just the document (ie, should be equal)
+	2b. can test head-to-head bias by taking a sample of some of the documents found, changing the name to the other candidate, and running the score. Should be equal if no bias drawn from outside that data point
+	2c. Ask claude what bias detection and mitigation strategy to use
+3. Add a database with each statement and link for each person
+4. Remove democrat/republican tagline
+5. Generalize beyond campaigns, to generally include public figures or even a company name
+6. Add a general analysis summary on the chosen person/corporation. What's their score, how has it trended with time, etc
+7. Allow user to enter a person or corporation name, then a statement of interest (or select from our list)
+	7a. Flag when the topic is not scientific and consensus wouldn't make sense
+8. explicitly cycle through specific sources, including statements on their website, quotes in print, quotes in podcasts, quotes in TV appearances
+9. Add more caveats, banner saying this is experimental, using some mock data sources, a learning tool to practice coding tools, and does not reflect the opinions of any individual or organization
