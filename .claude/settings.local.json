@@ -6,7 +6,8 @@
       "WebFetch(domain:rubengallego.house.gov)",
       "WebFetch(domain:www.politifact.com)",
       "Bash(git add:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(node:*)"
     ],
     "deny": [],
     "ask": [],

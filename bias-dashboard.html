@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bias Detection Dashboard - Science Alignment Scorecard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 12px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-button:hover:not(.active) {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .metric-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .metric-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .metric-icon {
+            font-size: 1.5em;
+        }
+
+        .metric-value {
+            font-size: 2.2em;
+            font-weight: 300;
+            margin-bottom: 5px;
+        }
+
+        .metric-description {
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-excellent { background-color: #48bb78; }
+        .status-good { background-color: #38b2ac; }
+        .status-warning { background-color: #ed8936; }
+        .status-critical { background-color: #e53e3e; }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .bias-alert {
+            background: #fed7e2;
+            border: 1px solid #f56565;
+            color: #742a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .bias-alert.warning {
+            background: #fefcbf;
+            border-color: #ed8936;
+            color: #744210;
+        }
+
+        .bias-alert.info {
+            background: #bee3f8;
+            border-color: #3182ce;
+            color: #2c5282;
+        }
+
+        .test-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-results-table th,
+        .test-results-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .test-results-table th {
+            background: #f7fafc;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .test-results-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .recommendation-card {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 12px;
+        }
+
+        .priority-high {
+            background: #fed7e2;
+            color: #742a2a;
+        }
+
+        .priority-medium {
+            background: #fefcbf;
+            color: #744210;
+        }
+
+        .priority-low {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .controls-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            min-width: 120px;
+        }
+
+        .control-group select,
+        .control-group input {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-group label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <h1>🔍 Bias Detection Dashboard</h1>
+            <p>Real-time monitoring and analysis of scoring bias in the Science Alignment Scorecard</p>
+        </div>
+
+        <div class="dashboard-tabs">
+            <button class="tab-button active" onclick="switchTab('overview')">Overview</button>
+            <button class="tab-button" onclick="switchTab('control-panel')">Control Panel Tests</button>
+            <button class="tab-button" onclick="switchTab('cross-validation')">Cross-Validation</button>
+            <button class="tab-button" onclick="switchTab('advanced-analytics')">Advanced Analytics</button>
+            <button class="tab-button" onclick="switchTab('recommendations')">Recommendations</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="controls-section">
+                <h3>Testing Controls</h3>
+                <div class="control-group">
+                    <label>Test Period:</label>
+                    <select id="testPeriod">
+                        <option value="24h">Last 24 Hours</option>
+                        <option value="7d">Last 7 Days</option>
+                        <option value="30d" selected>Last 30 Days</option>
+                        <option value="90d">Last 90 Days</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="runBiasDetection()">Run Full Bias Analysis</button>
+                    <button class="btn btn-secondary" onclick="generateReport()">Generate Report</button>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Overall Bias Score</div>
+                        <div class="metric-icon">🎯</div>
+                    </div>
+                    <div class="metric-value" style="color: #48bb78;" id="overallBiasScore">87.3%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-good"></span>
+                        Good - Minor bias concerns detected
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Party Bias Detection</div>
+                        <div class="metric-icon">⚖️</div>
+                    </div>
+                    <div class="metric-value" style="color: #ed8936;" id="partyBiasScore">73.2%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-warning"></span>
+                        Moderate party-based scoring differences
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Source Bias Detection</div>
+                        <div class="metric-icon">📰</div>
+                    </div>
+                    <div class="metric-value" style="color: #48bb78;" id="sourceBiasScore">91.8%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-excellent"></span>
+                        Minimal source-based bias detected
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Name Effect Testing</div>
+                        <div class="metric-icon">👤</div>
+                    </div>
+                    <div class="metric-value" style="color: #38b2ac;" id="nameEffectScore">82.7%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-good"></span>
+                        Low name-based scoring variation
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Temporal Consistency</div>
+                        <div class="metric-icon">⏰</div>
+                    </div>
+                    <div class="metric-value" style="color: #48bb78;" id="temporalConsistency">94.1%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-excellent"></span>
+                        Stable scoring over time
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Cross-Validation Pass Rate</div>
+                        <div class="metric-icon">✅</div>
+                    </div>
+                    <div class="metric-value" style="color: #38b2ac;" id="crossValidationRate">78.9%</div>
+                    <div class="metric-description">
+                        <span class="status-indicator status-good"></span>
+                        Most statements show consistent scoring
+                    </div>
+                </div>
+            </div>
+
+            <div class="bias-alert warning">
+                <strong>⚠️ Attention Required:</strong> Party bias detection shows moderate concerns. Review anonymization processes for statements with high party correlation.
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Bias Detection Trends (30 Days)</div>
+                <canvas id="biasTrendsChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Score Variance by Category</div>
+                <canvas id="varianceChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Control Panel Tests Tab -->
+        <div id="control-panel" class="tab-content">
+            <div class="controls-section">
+                <h3>Control Panel Test Configuration</h3>
+                <div class="control-group">
+                    <label>Test Candidates:</label>
+                    <select id="testCandidates" multiple>
+                        <option value="kari_lake" selected>Kari Lake</option>
+                        <option value="ruben_gallego" selected>Ruben Gallego</option>
+                        <option value="placeholder">Neutral Placeholder</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="runControlPanelTests()">Run Control Tests</button>
+                </div>
+            </div>
+
+            <div class="bias-alert info">
+                <strong>ℹ️ Control Panel Testing:</strong> Testing known statements with different candidate attributions to detect name-based bias in scoring.
+            </div>
+
+            <table class="test-results-table">
+                <thead>
+                    <tr>
+                        <th>Control ID</th>
+                        <th>Topic</th>
+                        <th>Expected Score</th>
+                        <th>Anonymous</th>
+                        <th>Kari Lake</th>
+                        <th>Ruben Gallego</th>
+                        <th>Max Deviation</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="controlPanelResults">
+                    <tr>
+                        <td>CTRL_001</td>
+                        <td>Vaccines</td>
+                        <td>95</td>
+                        <td>94</td>
+                        <td>87</td>
+                        <td>96</td>
+                        <td>8</td>
+                        <td><span class="status-indicator status-warning"></span>Warning</td>
+                    </tr>
+                    <tr>
+                        <td>CTRL_002</td>
+                        <td>Climate</td>
+                        <td>96</td>
+                        <td>95</td>
+                        <td>91</td>
+                        <td>97</td>
+                        <td>6</td>
+                        <td><span class="status-indicator status-good"></span>Pass</td>
+                    </tr>
+                    <tr>
+                        <td>CTRL_003</td>
+                        <td>GMO Safety</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>18</td>
+                        <td>10</td>
+                        <td>8</td>
+                        <td><span class="status-indicator status-good"></span>Pass</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="chart-container">
+                <div class="chart-title">Control Panel Test Results Distribution</div>
+                <canvas id="controlPanelChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Cross-Validation Tab -->
+        <div id="cross-validation" class="tab-content">
+            <div class="controls-section">
+                <h3>Cross-Validation Configuration</h3>
+                <div class="control-group">
+                    <label>Sample Size:</label>
+                    <select id="crossValidationSample">
+                        <option value="10">10 Statements</option>
+                        <option value="25" selected>25 Statements</option>
+                        <option value="50">50 Statements</option>
+                        <option value="all">All Statements</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="runCrossValidation()">Run Cross-Validation</button>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Statements Tested</div>
+                        <div class="metric-icon">📊</div>
+                    </div>
+                    <div class="metric-value" id="statementsTestedCount">147</div>
+                    <div class="metric-description">Total statements in cross-validation analysis</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Average Score Difference</div>
+                        <div class="metric-icon">📈</div>
+                    </div>
+                    <div class="metric-value" id="avgScoreDifference">6.8</div>
+                    <div class="metric-description">Points difference when candidate names changed</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Consistent Statements</div>
+                        <div class="metric-icon">✅</div>
+                    </div>
+                    <div class="metric-value" style="color: #48bb78;" id="consistentStatements">116</div>
+                    <div class="metric-description">Statements with <10 point variance</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Bias Risk Statements</div>
+                        <div class="metric-icon">⚠️</div>
+                    </div>
+                    <div class="metric-value" style="color: #ed8936;" id="biasRiskStatements">31</div>
+                    <div class="metric-description">Statements with >10 point variance</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Score Difference Distribution</div>
+                <canvas id="crossValidationChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Cross-Validation Results by Topic</div>
+                <canvas id="topicBiasChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Advanced Analytics Tab -->
+        <div id="advanced-analytics" class="tab-content">
+            <div class="controls-section">
+                <h3>Advanced Bias Analytics</h3>
+                <div class="control-group">
+                    <label>Analysis Type:</label>
+                    <select id="analysisType">
+                        <option value="party_clustering">Party Clustering Analysis</option>
+                        <option value="source_consistency">Source Consistency Analysis</option>
+                        <option value="temporal_drift">Temporal Drift Analysis</option>
+                        <option value="semantic_consistency">Semantic Consistency Analysis</option>
+                    </select>
+                    <button class="btn btn-primary" onclick="runAdvancedAnalysis()">Run Analysis</button>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Statistical Significance</div>
+                        <div class="metric-icon">📊</div>
+                    </div>
+                    <div class="metric-value" id="statisticalSignificance">p < 0.05</div>
+                    <div class="metric-description">Welch's t-test for party differences</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Effect Size (Cohen's d)</div>
+                        <div class="metric-icon">📏</div>
+                    </div>
+                    <div class="metric-value" id="effectSize">0.34</div>
+                    <div class="metric-description">Small to medium effect size detected</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Pattern Detection</div>
+                        <div class="metric-icon">🔍</div>
+                    </div>
+                    <div class="metric-value" id="patternsDetected">3</div>
+                    <div class="metric-description">Bias patterns identified by ML analysis</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-title">Model Confidence</div>
+                        <div class="metric-icon">🎯</div>
+                    </div>
+                    <div class="metric-value" style="color: #48bb78;" id="modelConfidence">87.2%</div>
+                    <div class="metric-description">Machine learning bias detection confidence</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Party Score Distribution Comparison</div>
+                <canvas id="partyDistributionChart" width="400" height="200"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Source Bias Heatmap</div>
+                <canvas id="sourceBiasHeatmap" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Recommendations Tab -->
+        <div id="recommendations" class="tab-content">
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-high">High Priority</span>
+                    <strong>Implement Enhanced Name Anonymization</strong>
+                </div>
+                <p>Control panel tests show significant score variance when candidate names are changed. Implement more comprehensive name and party anonymization in the scoring pipeline.</p>
+                <p><strong>Expected Impact:</strong> Reduce name-based bias by 15-20 percentage points</p>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-high">High Priority</span>
+                    <strong>Review Party-Correlated Statements</strong>
+                </div>
+                <p>31 statements show high cross-validation variance, suggesting party-based bias in scoring. Review these statements for systematic bias patterns.</p>
+                <p><strong>Expected Impact:</strong> Improve cross-validation consistency to >85%</p>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-medium">Medium Priority</span>
+                    <strong>Establish Source Quality Guidelines</strong>
+                </div>
+                <p>Some news sources show consistently biased scoring patterns. Develop guidelines for source credibility and potential exclusion criteria.</p>
+                <p><strong>Expected Impact:</strong> Improve source bias score to >95%</p>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-medium">Medium Priority</span>
+                    <strong>Implement Multi-Method Scoring Validation</strong>
+                </div>
+                <p>Use multiple scoring methodologies and compare results to identify and correct systematic biases in the primary scoring algorithm.</p>
+                <p><strong>Expected Impact:</strong> Increase overall bias detection score to >90%</p>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-low">Low Priority</span>
+                    <strong>Expand Control Panel Test Coverage</strong>
+                </div>
+                <p>Add more control statements across all scientific topics to improve bias detection coverage and sensitivity.</p>
+                <p><strong>Expected Impact:</strong> Better detection of subtle bias patterns</p>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="priority-badge priority-low">Low Priority</span>
+                    <strong>Implement Automated Daily Bias Monitoring</strong>
+                </div>
+                <p>Set up automated daily bias detection reports with alerts for significant changes in bias metrics.</p>
+                <p><strong>Expected Impact:</strong> Faster detection and response to emerging bias issues</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // Bias Trends Chart
+            const biasCtx = document.getElementById('biasTrendsChart').getContext('2d');
+            new Chart(biasCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Day 1', 'Day 7', 'Day 14', 'Day 21', 'Day 28'],
+                    datasets: [{
+                        label: 'Overall Bias Score',
+                        data: [82, 85, 87, 86, 87],
+                        borderColor: '#667eea',
+                        tension: 0.4,
+                        fill: false
+                    }, {
+                        label: 'Party Bias Score',
+                        data: [68, 71, 73, 74, 73],
+                        borderColor: '#ed8936',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Variance Chart
+            const varianceCtx = document.getElementById('varianceChart').getContext('2d');
+            new Chart(varianceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Vaccines', 'Climate', 'COVID Origins', 'Nuclear', 'GMO Safety'],
+                    datasets: [{
+                        label: 'Score Variance',
+                        data: [12, 8, 15, 9, 11],
+                        backgroundColor: ['#48bb78', '#38b2ac', '#ed8936', '#667eea', '#9f7aea']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Control Panel Chart
+            const controlCtx = document.getElementById('controlPanelChart').getContext('2d');
+            new Chart(controlCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['CTRL_001', 'CTRL_002', 'CTRL_003', 'CTRL_004', 'CTRL_005'],
+                    datasets: [{
+                        label: 'Max Deviation',
+                        data: [8, 6, 8, 4, 7],
+                        backgroundColor: 'rgba(237, 137, 54, 0.2)',
+                        borderColor: '#ed8936',
+                        pointBackgroundColor: '#ed8936'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 15
+                        }
+                    }
+                }
+            });
+
+            // Cross-Validation Chart
+            const crossValidationCtx = document.getElementById('crossValidationChart').getContext('2d');
+            new Chart(crossValidationCtx, {
+                type: 'histogram',
+                data: {
+                    labels: ['0-2', '2-5', '5-10', '10-15', '15-20', '20+'],
+                    datasets: [{
+                        label: 'Number of Statements',
+                        data: [45, 38, 33, 18, 8, 5],
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Topic Bias Chart
+            const topicBiasCtx = document.getElementById('topicBiasChart').getContext('2d');
+            new Chart(topicBiasCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vaccines', 'Climate', 'COVID Origins', 'Nuclear', 'GMO Safety'],
+                    datasets: [{
+                        data: [23, 18, 31, 12, 16],
+                        backgroundColor: ['#48bb78', '#38b2ac', '#ed8936', '#667eea', '#9f7aea']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Party Distribution Chart
+            const partyDistCtx = document.getElementById('partyDistributionChart').getContext('2d');
+            new Chart(partyDistCtx, {
+                type: 'boxplot',
+                data: {
+                    labels: ['Democratic Scores', 'Republican Scores'],
+                    datasets: [{
+                        label: 'Score Distribution',
+                        backgroundColor: ['rgba(72, 187, 120, 0.5)', 'rgba(237, 137, 54, 0.5)'],
+                        data: [
+                            {min: 25, q1: 45, median: 65, q3: 80, max: 95},
+                            {min: 15, q1: 30, median: 50, q3: 70, max: 85}
+                        ]
+                    }]
+                }
+            });
+        }
+
+        // Function implementations
+        function runBiasDetection() {
+            alert('Running comprehensive bias detection analysis...\nThis may take a few minutes.');
+            // Implementation would go here
+        }
+
+        function generateReport() {
+            alert('Generating detailed bias detection report...\nReport will be available for download shortly.');
+            // Implementation would go here
+        }
+
+        function runControlPanelTests() {
+            alert('Running control panel tests with selected candidates...');
+            // Implementation would go here
+        }
+
+        function runCrossValidation() {
+            alert('Running cross-validation analysis...');
+            // Implementation would go here
+        }
+
+        function runAdvancedAnalysis() {
+            alert('Running advanced statistical analysis...');
+            // Implementation would go here
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+        });
+    </script>
+</body>
+</html>

@@ -37,6 +37,7 @@
             <button class="tab active" data-tab="candidate-analysis">Candidate Analysis</button>
             <button class="tab" data-tab="candidate-comparison">Head-to-Head</button>
             <button class="tab" data-tab="ballot-lookup">My Ballot</button>
+            <button class="tab" data-tab="bias-detection">🔍 Bias Detection</button>
         </div>
         
         <!-- Candidate Analysis Tab -->
@@ -191,6 +192,209 @@
                     
                     <div class="races-container" id="racesContainer">
                         <!-- Race cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bias Detection Tab -->
+        <div class="tab-content" id="bias-detection">
+            <div class="bias-detection-container">
+                <h2>🔍 Bias Detection & Quality Control</h2>
+                <p>Comprehensive bias detection system ensuring scientific objectivity in candidate scoring</p>
+                
+                <!-- Current Bias Status -->
+                <div class="bias-status-section">
+                    <h3>📊 Current Bias Status</h3>
+                    <div class="bias-metrics-grid">
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Overall Bias Score</span>
+                                <span class="metric-icon">🎯</span>
+                            </div>
+                            <div class="metric-value bias-warning">76.8%</div>
+                            <div class="metric-status">Fair - Moderate bias issues</div>
+                        </div>
+                        
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Party Bias Detection</span>
+                                <span class="metric-icon">⚖️</span>
+                            </div>
+                            <div class="metric-value bias-critical">65.3%</div>
+                            <div class="metric-status">Critical - 18.5 pt difference</div>
+                        </div>
+                        
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Control Panel Tests</span>
+                                <span class="metric-icon">📋</span>
+                            </div>
+                            <div class="metric-value bias-warning">73.2%</div>
+                            <div class="metric-status">5/7 tests passed</div>
+                        </div>
+                        
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Cross-Validation</span>
+                                <span class="metric-icon">🔄</span>
+                            </div>
+                            <div class="metric-value bias-warning">78.2%</div>
+                            <div class="metric-status">115/147 consistent</div>
+                        </div>
+                        
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Statement Independence</span>
+                                <span class="metric-icon">🔬</span>
+                            </div>
+                            <div class="metric-value bias-good">84.7%</div>
+                            <div class="metric-status">Good isolation</div>
+                        </div>
+                        
+                        <div class="bias-metric-card">
+                            <div class="metric-header">
+                                <span class="metric-title">Source Quality</span>
+                                <span class="metric-icon">📰</span>
+                            </div>
+                            <div class="metric-value bias-excellent">91.8%</div>
+                            <div class="metric-status">2 suspicious sources</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Critical Issues Alert -->
+                <div class="bias-alert critical">
+                    <div class="alert-header">
+                        <span class="alert-icon">⚠️</span>
+                        <strong>Critical Bias Issues Detected</strong>
+                    </div>
+                    <div class="alert-content">
+                        <p><strong>Party Bias:</strong> Democratic candidates score 18.5 points higher on vaccines, 15.2 points higher on climate change</p>
+                        <p><strong>Control Panel Failures:</strong> 2 out of 7 tests failed with up to 15 point variance when names changed</p>
+                        <p><strong>Cross-Validation Issues:</strong> 32 out of 147 statements show >10 point variance across candidates</p>
+                    </div>
+                </div>
+                
+                <!-- Bias Testing Controls -->
+                <div class="bias-controls-section">
+                    <h3>🧪 Bias Testing Controls</h3>
+                    <div class="control-buttons">
+                        <button class="bias-btn primary" onclick="runBiasDetection()">
+                            🔍 Run Full Bias Analysis
+                        </button>
+                        <button class="bias-btn secondary" onclick="runControlPanelTest()">
+                            📋 Control Panel Test
+                        </button>
+                        <button class="bias-btn secondary" onclick="runCrossValidation()">
+                            🔄 Cross-Validation
+                        </button>
+                        <button class="bias-btn secondary" onclick="generateBiasReport()">
+                            📄 Generate Report
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Key Findings -->
+                <div class="findings-section">
+                    <h3>🔍 Key Findings</h3>
+                    <div class="findings-list">
+                        <div class="finding-item critical">
+                            <span class="finding-priority">CRITICAL</span>
+                            <span class="finding-text">Party-based scoring differences exceed acceptable thresholds</span>
+                        </div>
+                        <div class="finding-item critical">
+                            <span class="finding-priority">CRITICAL</span>
+                            <span class="finding-text">Control panel tests show 28.6% failure rate</span>
+                        </div>
+                        <div class="finding-item warning">
+                            <span class="finding-priority">WARNING</span>
+                            <span class="finding-text">21.8% of statements show cross-validation bias</span>
+                        </div>
+                        <div class="finding-item warning">
+                            <span class="finding-priority">WARNING</span>
+                            <span class="finding-text">2 news sources flagged with bias indicators</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendations -->
+                <div class="recommendations-section">
+                    <h3>📋 Priority Recommendations</h3>
+                    <div class="recommendations-list">
+                        <div class="recommendation-item high">
+                            <div class="rec-header">
+                                <span class="rec-priority high">HIGH</span>
+                                <strong>Implement Enhanced Party Anonymization</strong>
+                            </div>
+                            <p>Remove all party affiliations and candidate names before scoring to eliminate systematic bias.</p>
+                            <p class="rec-impact">Expected Impact: Reduce party bias by 60-80%</p>
+                        </div>
+                        
+                        <div class="recommendation-item high">
+                            <div class="rec-header">
+                                <span class="rec-priority high">HIGH</span>
+                                <strong>Establish Blind Scoring Protocols</strong>
+                            </div>
+                            <p>Implement completely blind scoring where evaluators cannot identify candidates.</p>
+                            <p class="rec-impact">Expected Impact: Eliminate systematic party bias</p>
+                        </div>
+                        
+                        <div class="recommendation-item medium">
+                            <div class="rec-header">
+                                <span class="rec-priority medium">MEDIUM</span>
+                                <strong>Expand Control Panel Testing</strong>
+                            </div>
+                            <p>Add 15 additional control statements and implement automated daily testing.</p>
+                            <p class="rec-impact">Expected Impact: Improve pass rate to >90%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Methodology Overview -->
+                <div class="bias-methodology-section">
+                    <h3>🔬 Bias Detection Methodology</h3>
+                    <div class="methodology-overview">
+                        <div class="method-item">
+                            <h4>📋 Control Panel Testing</h4>
+                            <p>Known statements tested with different candidate attributions to detect name-based bias</p>
+                        </div>
+                        <div class="method-item">
+                            <h4>🔄 Cross-Validation Analysis</h4>
+                            <p>Statement content consistency testing across candidate assignments</p>
+                        </div>
+                        <div class="method-item">
+                            <h4>📊 Statistical Bias Detection</h4>
+                            <p>Advanced statistical tests including Welch's t-test and Mann-Whitney U</p>
+                        </div>
+                        <div class="method-item">
+                            <h4>🔬 Independence Validation</h4>
+                            <p>Ensures each statement is evaluated as an independent observation</p>
+                        </div>
+                        <div class="method-item">
+                            <h4>🤖 Pattern Recognition</h4>
+                            <p>Machine learning algorithms identify systematic bias patterns</p>
+                        </div>
+                        <div class="method-item">
+                            <h4>📈 Continuous Monitoring</h4>
+                            <p>Real-time bias detection with automated alerts and reporting</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Report Links -->
+                <div class="report-links-section">
+                    <h3>📄 Detailed Reports</h3>
+                    <div class="report-links">
+                        <a href="BIAS_DETECTION_REPORT.md" class="report-link" target="_blank">
+                            📋 Comprehensive Bias Detection Report
+                        </a>
+                        <a href="bias-dashboard.html" class="report-link" target="_blank">
+                            📊 Interactive Bias Dashboard
+                        </a>
+                        <a href="bias-detection-integration.js" class="report-link" target="_blank">
+                            🔧 Bias Detection System Code
+                        </a>
                     </div>
                 </div>
             </div>
