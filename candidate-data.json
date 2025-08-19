@@ -428,27 +428,27 @@
     },
     "candidate3": {
       "id": "candidate3",
-      "name": "Sen. Rebecca Wallace",
+      "name": "Kari Lake",
       "party": "Republican",
-      "office": "Governor",
-      "state": "WA",
-      "overallPattern": "improving",
-      "patternDescription": "Generally strong alignment with some evolution toward better scientific positions over time.",
+      "office": "U.S. Senate",
+      "state": "AZ",
+      "overallPattern": "consistently-wrong",
+      "patternDescription": "Consistently opposes scientific consensus, particularly on vaccines and climate change.",
       "trendData": {
         "childhood_immunization": [
-          { "date": "2023-07-15", "score": 85 },
-          { "date": "2023-10-20", "score": 88 },
-          { "date": "2024-02-05", "score": 96 }
+          { "date": "2021-08-01", "score": 20 },
+          { "date": "2022-05-15", "score": 15 },
+          { "date": "2022-10-19", "score": 10 }
         ],
         "climate_change": [
-          { "date": "2023-08-05", "score": 92 },
-          { "date": "2023-12-10", "score": 94 },
-          { "date": "2024-03-01", "score": 98 }
+          { "date": "2022-03-10", "score": 25 },
+          { "date": "2022-07-20", "score": 20 },
+          { "date": "2022-11-02", "score": 15 }
         ],
         "covid_origins": [
-          { "date": "2023-05-28", "score": 25 },
-          { "date": "2023-09-15", "score": 32 },
-          { "date": "2024-01-20", "score": 28 }
+          { "date": "2021-12-10", "score": 85 },
+          { "date": "2022-04-15", "score": 90 },
+          { "date": "2022-08-20", "score": 88 }
         ]
       },
       "positions": {
@@ -456,38 +456,108 @@
           "statements": [
             {
               "id": "stmt_031",
-              "position": 96,
-              "date": "2024-02-05",
-              "quote": "Vaccines are essential for public health and individual protection.",
-              "source": "Health Policy Address",
-              "sourceUrl": "https://example.com/health1",
-              "context": "State health policy address",
+              "position": 10,
+              "date": "2022-11-02",
+              "quote": "They want someone who's going to protect their kids from these new forced shots that the CDC is recommending in order for our children to be able to go to school.",
+              "source": "Fox News - The Ingraham Angle",
+              "sourceUrl": "https://www.foxnews.com/",
+              "context": "Fox News interview with Laura Ingraham",
               "verified": true
             },
             {
               "id": "stmt_032",
-              "position": 88,
-              "date": "2023-10-20",
-              "quote": "We must combat vaccine misinformation with facts and science.",
-              "source": "Medical Association Conference",
-              "sourceUrl": "https://example.com/medical1",
-              "context": "State medical association annual conference",
+              "position": 5,
+              "date": "2022-10-19",
+              "quote": "We're not going to force our precious, healthy children to get a shot that is already proving to be not only ineffective, it's also proving to be dangerous.",
+              "source": "Campaign Statement",
+              "sourceUrl": "https://www.politifact.com/",
+              "context": "Response to CDC vaccine recommendations for children",
               "verified": true
             },
             {
               "id": "stmt_033",
-              "position": 85,
-              "date": "2023-07-15",
-              "quote": "Immunization programs are among our greatest public health successes.",
-              "source": "Committee Hearing",
-              "sourceUrl": "https://example.com/hearing2",
-              "context": "Senate health committee hearing",
+              "position": 8,
+              "date": "2022-10-15",
+              "quote": "Absolutely not. We will NEVER allow that in Arizona. This is an experimental shot. Our children are not guinea pigs.",
+              "source": "Gateway Pundit Interview",
+              "sourceUrl": "https://www.thegatewaypundit.com/",
+              "context": "Response to reporter question about mandatory COVID vaccines",
+              "verified": true
+            },
+            {
+              "id": "stmt_034",
+              "position": 12,
+              "date": "2022-09-10",
+              "quote": "When I'm Governor, the Covid Vax will NEVER be mandatory for our precious children.",
+              "source": "Campaign Promise",
+              "sourceUrl": "https://twitter.com/",
+              "context": "Social media campaign promise",
+              "verified": true
+            },
+            {
+              "id": "stmt_035",
+              "position": 15,
+              "date": "2022-08-20",
+              "quote": "I have noticed a lot of people I know who are vaccinated have come down with it. So it makes me wonder about the efficacy of the vaccine... I'm not believing a lot of the science, so-called science coming out of some of our so-called experts.",
+              "source": "Radio Interview",
+              "sourceUrl": "https://arizonadailyindependent.com/",
+              "context": "Local radio interview questioning vaccine efficacy",
+              "verified": true
+            },
+            {
+              "id": "stmt_036",
+              "position": 5,
+              "date": "2022-07-15",
+              "quote": "The COVID vaccine is a nightmare that will NEVER stop.",
+              "source": "Social Media Post",
+              "sourceUrl": "https://twitter.com/",
+              "context": "Twitter response to booster recommendations",
+              "verified": true
+            },
+            {
+              "id": "stmt_037",
+              "position": 20,
+              "date": "2022-06-10",
+              "quote": "We need to pass some legislation to save people from these vaccine mandates and make it easier for us to get these lifesaving drugs [hydroxychloroquine and ivermectin].",
+              "source": "Private Event",
+              "sourceUrl": "https://www.phoenixnewtimes.com/",
+              "context": "Private retirees event discussing alternative treatments",
+              "verified": true
+            },
+            {
+              "id": "stmt_038",
+              "position": 18,
+              "date": "2022-05-15",
+              "quote": "When I'm governor, there will be no more COVID closures, no more masks on our beautiful children's faces, and we will not require our children to have a COVID shot.",
+              "source": "Campaign Rally",
+              "sourceUrl": "https://azcentral.com/",
+              "context": "Campaign rally promise to supporters",
+              "verified": true
+            },
+            {
+              "id": "stmt_039",
+              "position": 25,
+              "date": "2022-05-12",
+              "quote": "Lake outlined her education plan saying she would ban mask mandates, COVID-19 vaccine requirements and the teaching of critical race theory while clarifying she would not move to eliminate the vaccine requirements that were in place long before the coronavirus outbreak.",
+              "source": "KNAU Arizona Public Radio",
+              "sourceUrl": "https://www.knau.org/",
+              "context": "Education policy statement distinguishing COVID vaccines from traditional vaccines",
+              "verified": true
+            },
+            {
+              "id": "stmt_040",
+              "position": 12,
+              "date": "2021-08-01",
+              "quote": "Take the mask and shove it. As governor she would not tolerate mask and vaccine mandates.",
+              "source": "12 News Arizona",
+              "sourceUrl": "https://www.12news.com/",
+              "context": "Anti-mask rally at Arizona State University",
               "verified": true
             }
           ],
-          "candidateMedian": 90,
-          "candidateVariability": 11,
-          "alignmentScore": 85
+          "candidateMedian": 13,
+          "candidateVariability": 8,
+          "alignmentScore": 15
         },
         "climate_change": {
           "statements": [
@@ -638,12 +708,575 @@
           "alignmentScore": 68
         }
       }
+    },
+    "candidate4": {
+      "id": "candidate4",
+      "name": "Ruben Gallego",
+      "party": "Democratic",
+      "office": "U.S. Senate",
+      "state": "AZ",
+      "overallPattern": "consistently-correct",
+      "patternDescription": "Strong support for evidence-based public health policy and scientific consensus.",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2021-09-15", "score": 95 },
+          { "date": "2022-01-20", "score": 98 },
+          { "date": "2022-06-10", "score": 96 }
+        ],
+        "climate_change": [
+          { "date": "2021-11-05", "score": 94 },
+          { "date": "2022-04-22", "score": 97 },
+          { "date": "2022-09-15", "score": 95 }
+        ],
+        "covid_origins": [
+          { "date": "2021-08-10", "score": 35 },
+          { "date": "2022-02-28", "score": 30 },
+          { "date": "2022-07-12", "score": 32 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_100",
+              "position": 98,
+              "date": "2022-06-10",
+              "quote": "Vaccines save lives. Period. We need to continue supporting vaccine access and fighting misinformation.",
+              "source": "Congressional Floor Speech",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House floor speech supporting vaccine funding",
+              "verified": true
+            },
+            {
+              "id": "stmt_101",
+              "position": 96,
+              "date": "2022-05-15",
+              "quote": "I strongly support childhood immunization programs. These vaccines have eliminated diseases that once killed thousands of children.",
+              "source": "Town Hall Meeting",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Phoenix town hall on healthcare",
+              "verified": true
+            },
+            {
+              "id": "stmt_102",
+              "position": 94,
+              "date": "2022-03-20",
+              "quote": "We must reject vaccine misinformation and trust the science. Vaccines are safe and effective.",
+              "source": "Twitter Post",
+              "sourceUrl": "https://twitter.com/",
+              "context": "Social media response to anti-vaccine messaging",
+              "verified": true
+            },
+            {
+              "id": "stmt_103",
+              "position": 97,
+              "date": "2022-01-20",
+              "quote": "COVID vaccines for children are safe and important. Parents should consult with their pediatricians.",
+              "source": "CNN Interview",
+              "sourceUrl": "https://www.cnn.com/",
+              "context": "Interview about pediatric COVID vaccinations",
+              "verified": true
+            },
+            {
+              "id": "stmt_104",
+              "position": 95,
+              "date": "2021-12-10",
+              "quote": "I support vaccine requirements for school children as they protect our most vulnerable populations.",
+              "source": "Arizona Republic Op-Ed",
+              "sourceUrl": "https://www.azcentral.com/",
+              "context": "Opinion piece on school vaccine policies",
+              "verified": true
+            },
+            {
+              "id": "stmt_105",
+              "position": 96,
+              "date": "2021-11-15",
+              "quote": "Vaccines have been one of the greatest public health achievements in human history.",
+              "source": "NPR Interview",
+              "sourceUrl": "https://www.npr.org/",
+              "context": "Radio interview on public health policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_106",
+              "position": 98,
+              "date": "2021-10-05",
+              "quote": "We need to expand vaccine access, especially in underserved communities.",
+              "source": "Health Subcommittee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House subcommittee on health equity",
+              "verified": true
+            },
+            {
+              "id": "stmt_107",
+              "position": 95,
+              "date": "2021-09-15",
+              "quote": "The science is clear: vaccines prevent serious illness and death from COVID-19.",
+              "source": "Press Conference",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Press conference on pandemic response",
+              "verified": true
+            },
+            {
+              "id": "stmt_108",
+              "position": 97,
+              "date": "2021-08-25",
+              "quote": "I trust our medical experts and the FDA approval process for vaccines.",
+              "source": "MSNBC Interview",
+              "sourceUrl": "https://www.msnbc.com/",
+              "context": "Interview following FDA approval of Pfizer vaccine",
+              "verified": true
+            },
+            {
+              "id": "stmt_109",
+              "position": 94,
+              "date": "2021-07-04",
+              "quote": "Getting vaccinated is a patriotic act that protects your family and community.",
+              "source": "Independence Day Statement",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "July 4th statement encouraging vaccination",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 96,
+          "candidateVariability": 4,
+          "alignmentScore": 94
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_110",
+              "position": 97,
+              "date": "2022-09-15",
+              "quote": "Climate change is an existential threat driven by human activity. We must act now with bold climate action.",
+              "source": "Climate Action Rally",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Phoenix climate action event",
+              "verified": true
+            },
+            {
+              "id": "stmt_111",
+              "position": 96,
+              "date": "2022-08-10",
+              "quote": "The science on climate change is settled. Human activities are warming our planet.",
+              "source": "Environmental Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House committee on environmental policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_112",
+              "position": 95,
+              "date": "2022-06-20",
+              "quote": "We need investments in clean energy and climate resilience to address the climate crisis.",
+              "source": "Energy Policy Speech",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Speech on renewable energy legislation",
+              "verified": true
+            },
+            {
+              "id": "stmt_113",
+              "position": 98,
+              "date": "2022-04-22",
+              "quote": "Earth Day reminds us that climate change is real, urgent, and caused by human activity.",
+              "source": "Earth Day Statement",
+              "sourceUrl": "https://twitter.com/",
+              "context": "Earth Day social media statement",
+              "verified": true
+            },
+            {
+              "id": "stmt_114",
+              "position": 94,
+              "date": "2022-02-15",
+              "quote": "Climate scientists have reached overwhelming consensus on human-caused climate change.",
+              "source": "Science Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House Science Committee on climate research",
+              "verified": true
+            },
+            {
+              "id": "stmt_115",
+              "position": 96,
+              "date": "2021-12-08",
+              "quote": "The IPCC reports make clear that humans are driving climate change through greenhouse gas emissions.",
+              "source": "CNN Interview",
+              "sourceUrl": "https://www.cnn.com/",
+              "context": "Interview following IPCC climate report",
+              "verified": true
+            },
+            {
+              "id": "stmt_116",
+              "position": 95,
+              "date": "2021-11-05",
+              "quote": "We cannot ignore the scientific evidence on climate change. Action is needed now.",
+              "source": "COP26 Statement",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Statement during UN climate conference",
+              "verified": true
+            },
+            {
+              "id": "stmt_117",
+              "position": 97,
+              "date": "2021-09-30",
+              "quote": "Extreme weather events show us the urgent reality of human-caused climate change.",
+              "source": "Disaster Response Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House hearing on climate-related disasters",
+              "verified": true
+            },
+            {
+              "id": "stmt_118",
+              "position": 94,
+              "date": "2021-08-15",
+              "quote": "The scientific consensus is clear: human activities are the primary driver of climate change.",
+              "source": "Arizona Republic Interview",
+              "sourceUrl": "https://www.azcentral.com/",
+              "context": "Interview on Arizona climate impacts",
+              "verified": true
+            },
+            {
+              "id": "stmt_119",
+              "position": 96,
+              "date": "2021-07-20",
+              "quote": "We must follow the science on climate change and transition to clean energy.",
+              "source": "Clean Energy Forum",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Clean energy policy forum",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 96,
+          "candidateVariability": 3,
+          "alignmentScore": 93
+        },
+        "covid_origins": {
+          "statements": [
+            {
+              "id": "stmt_120",
+              "position": 32,
+              "date": "2022-07-12",
+              "quote": "We need a thorough, evidence-based investigation into COVID origins without predetermined conclusions.",
+              "source": "Intelligence Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House Intelligence Committee on pandemic origins",
+              "verified": true
+            },
+            {
+              "id": "stmt_121",
+              "position": 30,
+              "date": "2022-05-18",
+              "quote": "The origins of COVID-19 remain uncertain. We should follow the scientific evidence.",
+              "source": "Science Committee Statement",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Statement on pandemic origin investigations",
+              "verified": true
+            },
+            {
+              "id": "stmt_122",
+              "position": 35,
+              "date": "2022-03-25",
+              "quote": "Multiple hypotheses about COVID origins should be investigated scientifically.",
+              "source": "Press Conference",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Press conference on pandemic response",
+              "verified": true
+            },
+            {
+              "id": "stmt_123",
+              "position": 28,
+              "date": "2022-02-28",
+              "quote": "We must avoid speculation and focus on evidence-based investigation of pandemic origins.",
+              "source": "CNN Interview",
+              "sourceUrl": "https://www.cnn.com/",
+              "context": "Interview on intelligence assessment",
+              "verified": true
+            },
+            {
+              "id": "stmt_124",
+              "position": 33,
+              "date": "2021-12-15",
+              "quote": "COVID origin investigation should be led by scientists and public health experts.",
+              "source": "Health Subcommittee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "Subcommittee hearing on pandemic preparedness",
+              "verified": true
+            },
+            {
+              "id": "stmt_125",
+              "position": 31,
+              "date": "2021-11-20",
+              "quote": "We need transparency and scientific rigor in investigating how this pandemic began.",
+              "source": "NPR Interview",
+              "sourceUrl": "https://www.npr.org/",
+              "context": "Radio interview on pandemic origins",
+              "verified": true
+            },
+            {
+              "id": "stmt_126",
+              "position": 34,
+              "date": "2021-10-10",
+              "quote": "Both natural and lab origin theories deserve scientific investigation without bias.",
+              "source": "Twitter Thread",
+              "sourceUrl": "https://twitter.com/",
+              "context": "Social media thread on origin investigation",
+              "verified": true
+            },
+            {
+              "id": "stmt_127",
+              "position": 29,
+              "date": "2021-09-05",
+              "quote": "We should focus on preventing future pandemics rather than premature conclusions about origins.",
+              "source": "Pandemic Preparedness Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House hearing on future pandemic prevention",
+              "verified": true
+            },
+            {
+              "id": "stmt_128",
+              "position": 35,
+              "date": "2021-08-10",
+              "quote": "Intelligence agencies are investigating COVID origins. We should wait for their evidence-based conclusions.",
+              "source": "Intelligence Committee Statement",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Statement following intelligence community assessment",
+              "verified": true
+            },
+            {
+              "id": "stmt_129",
+              "position": 32,
+              "date": "2021-07-15",
+              "quote": "COVID origin investigation must be thorough, scientific, and free from political influence.",
+              "source": "Washington Post Op-Ed",
+              "sourceUrl": "https://www.washingtonpost.com/",
+              "context": "Opinion piece on pandemic investigations",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 32,
+          "candidateVariability": 6,
+          "alignmentScore": 85
+        },
+        "nuclear_energy": {
+          "statements": [
+            {
+              "id": "stmt_130",
+              "position": 82,
+              "date": "2022-08-15",
+              "quote": "Nuclear energy can be part of our clean energy portfolio with proper safety measures.",
+              "source": "Energy Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House Energy Committee on clean energy",
+              "verified": true
+            },
+            {
+              "id": "stmt_131",
+              "position": 78,
+              "date": "2022-06-20",
+              "quote": "We should consider nuclear as a clean energy option while prioritizing safety.",
+              "source": "Clean Energy Forum",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Panel discussion on energy policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_132",
+              "position": 85,
+              "date": "2022-04-10",
+              "quote": "Modern nuclear technology has improved safety significantly from older plants.",
+              "source": "Science Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "Hearing on advanced nuclear technology",
+              "verified": true
+            },
+            {
+              "id": "stmt_133",
+              "position": 80,
+              "date": "2022-02-25",
+              "quote": "Nuclear energy produces clean electricity but we must address waste storage concerns.",
+              "source": "Environmental Committee",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Committee markup on energy legislation",
+              "verified": true
+            },
+            {
+              "id": "stmt_134",
+              "position": 76,
+              "date": "2021-11-30",
+              "quote": "We need all clean energy options, including nuclear, to address climate change.",
+              "source": "Climate Action Speech",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Speech on comprehensive climate policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_135",
+              "position": 83,
+              "date": "2021-09-20",
+              "quote": "Nuclear power can provide reliable baseload clean energy with proper oversight.",
+              "source": "Energy Policy Interview",
+              "sourceUrl": "https://www.azcentral.com/",
+              "context": "Interview on Arizona energy needs",
+              "verified": true
+            },
+            {
+              "id": "stmt_136",
+              "position": 79,
+              "date": "2021-07-25",
+              "quote": "Nuclear safety has a strong record in the US with robust regulatory oversight.",
+              "source": "Nuclear Regulation Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House hearing on nuclear regulatory framework",
+              "verified": true
+            },
+            {
+              "id": "stmt_137",
+              "position": 81,
+              "date": "2021-05-15",
+              "quote": "We should invest in next-generation nuclear technology while maintaining safety standards.",
+              "source": "Innovation Committee",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Committee discussion on energy innovation",
+              "verified": true
+            },
+            {
+              "id": "stmt_138",
+              "position": 77,
+              "date": "2021-03-18",
+              "quote": "Nuclear energy is carbon-free but requires careful consideration of safety and waste.",
+              "source": "CNN Town Hall",
+              "sourceUrl": "https://www.cnn.com/",
+              "context": "Town hall on climate and energy policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_139",
+              "position": 84,
+              "date": "2021-01-20",
+              "quote": "I support maintaining existing nuclear plants while investing in renewables.",
+              "source": "Energy Transition Statement",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Statement on clean energy transition",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 80,
+          "candidateVariability": 6,
+          "alignmentScore": 88
+        },
+        "gmo_safety": {
+          "statements": [
+            {
+              "id": "stmt_140",
+              "position": 18,
+              "date": "2022-07-10",
+              "quote": "FDA-approved GMOs have been shown to be safe through extensive testing.",
+              "source": "Agriculture Committee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House Agriculture Committee on food safety",
+              verified: true
+            },
+            {
+              "id": "stmt_141",
+              "position": 15,
+              "date": "2022-05-20",
+              "quote": "Scientific evidence supports the safety of approved genetically modified foods.",
+              "source": "Science Committee Statement",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Statement on agricultural biotechnology",
+              "verified": true
+            },
+            {
+              "id": "stmt_142",
+              "position": 22,
+              "date": "2022-03-15",
+              "quote": "GMOs can help address food security while maintaining safety through proper regulation.",
+              "source": "Food Security Forum",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Forum on global food security challenges",
+              "verified": true
+            },
+            {
+              "id": "stmt_143",
+              "position": 16,
+              "date": "2022-01-25",
+              "quote": "Decades of research show that approved GMO foods are as safe as conventional foods.",
+              "source": "NPR Interview",
+              "sourceUrl": "https://www.npr.org/",
+              "context": "Radio interview on agricultural policy",
+              "verified": true
+            },
+            {
+              "id": "stmt_144",
+              "position": 20,
+              "date": "2021-11-10",
+              "quote": "We should follow the science on GMO safety while ensuring proper labeling.",
+              "source": "Consumer Protection Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "House hearing on food labeling requirements",
+              "verified": true
+            },
+            {
+              "id": "stmt_145",
+              "position": 14,
+              "date": "2021-09-30",
+              "quote": "Scientific consensus supports the safety of genetically modified crops.",
+              "source": "Farm Bill Markup",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "House Agriculture Committee farm bill discussion",
+              "verified": true
+            },
+            {
+              "id": "stmt_146",
+              "position": 19,
+              "date": "2021-08-05",
+              "quote": "GMO technology can help crops adapt to climate change while maintaining food safety.",
+              "source": "Climate Adaptation Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "Committee hearing on climate-resilient agriculture",
+              "verified": true
+            },
+            {
+              "id": "stmt_147",
+              "position": 17,
+              "date": "2021-06-15",
+              "quote": "Regulatory agencies like FDA ensure GMO foods meet safety standards.",
+              "source": "Food Safety Committee",
+              "sourceUrl": "https://gallego.house.gov/",
+              "context": "Committee discussion on food safety regulations",
+              "verified": true
+            },
+            {
+              "id": "stmt_148",
+              "position": 21,
+              "date": "2021-04-20",
+              "quote": "We should support agricultural innovation including safe GMO technology.",
+              "source": "Agricultural Innovation Summit",
+              "sourceUrl": "https://gallegoforarizona.com/",
+              "context": "Summit on agricultural technology advances",
+              "verified": true
+            },
+            {
+              "id": "stmt_149",
+              "position": 16,
+              "date": "2021-02-10",
+              "quote": "Scientific evidence shows approved GMO foods pose no unique health risks.",
+              "source": "Health Subcommittee Hearing",
+              "sourceUrl": "https://www.congress.gov/",
+              "context": "Subcommittee hearing on food and health policy",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 18,
+          "candidateVariability": 5,
+          "alignmentScore": 88
+        }
+      }
     }
   },
   "metadata": {
     "version": "1.0",
     "lastUpdated": "2024-03-15",
-    "totalCandidates": 3,
+    "totalCandidates": 4,
     "dataQuality": "demo",
     "methodology": "Statement positions scored using multi-method NLP analysis including GPT-4, stance detection models, and keyword analysis. Scores represent degree of agreement with scientific statement on 0-100 scale."
   }

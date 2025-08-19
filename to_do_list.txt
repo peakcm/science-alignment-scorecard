@@ -14,7 +14,9 @@
 7. Allow user to enter a person or corporation name, then a statement of interest (or select from our list)
 	7a. Flag when the topic is not scientific and consensus wouldn't make sense
 8. explicitly cycle through specific sources, including statements on their website, quotes in print, quotes in podcasts, quotes in TV appearances
-
+9. Develop a list of scientific questions to ask.
+	9a. Does a certain venue result in a shift of people's statements towards one direction or another?
+	9b. Lineplot of a person over time for their rolling average score
 
 
 
