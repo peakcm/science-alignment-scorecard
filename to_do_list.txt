@@ -14,4 +14,10 @@
 7. Allow user to enter a person or corporation name, then a statement of interest (or select from our list)
 	7a. Flag when the topic is not scientific and consensus wouldn't make sense
 8. explicitly cycle through specific sources, including statements on their website, quotes in print, quotes in podcasts, quotes in TV appearances
-9. Add more caveats, banner saying this is experimental, using some mock data sources, a learning tool to practice coding tools, and does not reflect the opinions of any individual or organization
+
+
+
+
+DONE
+Add more caveats, banner saying this is experimental, using some mock data sources, a learning tool to practice coding tools, and does not reflect the opinions of any individual or organization
+Reduce size of the index.html document by identifying certain parts which can be pulled out to a different file
