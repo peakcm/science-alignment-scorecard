@@ -80,7 +80,8 @@ function transformCandidateData(candidateData, consensusData) {
                     candidateStatements: position.statements || [],
                     candidateMedian: position.candidateMedian,
                     candidateVariability: position.candidateVariability,
-                    alignmentScore: position.alignmentScore
+                    alignmentScore: position.alignmentScore,
+                    dataStatus: position.dataStatus || 'sufficient'
                 });
             }
         });
@@ -93,19 +94,23 @@ function initializeBallotData() {
     // Initialize mock ballot data (in production, this would come from an API)
     ballotData = {
         "WA": {
-            district: "Washington State, 7th Congressional District",
+            district: "Washington State, King County",
             races: [
                 {
                     office: "U.S. Senate",
-                    candidates: ["candidate1", "candidate2"]
+                    candidates: ["candidate1", "candidate2", "candidate4"]
+                },
+                {
+                    office: "Mayor of Seattle", 
+                    candidates: ["candidate5", "candidate6"]
+                },
+                {
+                    office: "King County Council",
+                    candidates: ["candidate7", "candidate8"]
                 },
                 {
                     office: "Governor", 
                     candidates: ["candidate3", "candidate4"]
-                },
-                {
-                    office: "U.S. House",
-                    candidates: ["candidate5", "candidate6"]
                 }
             ]
         }
@@ -605,9 +610,7 @@ function exportToPDF() {
     
     // In a real implementation, this would generate an actual PDF
     const candidateData = candidates[currentCandidate];
-    const overallScore = Math.round(
-        candidateData.topics.reduce((sum, topic) => sum + topic.alignmentScore, 0) / candidateData.topics.length
-    );
+    const overallScore = calculateOverallScore(candidateData);
     
     // Simulate PDF generation
     const pdfContent = `
@@ -676,9 +679,7 @@ function shareViaTwitter() {
     if (!currentCandidate) return;
     
     const candidateData = candidates[currentCandidate];
-    const overallScore = Math.round(
-        candidateData.topics.reduce((sum, topic) => sum + topic.alignmentScore, 0) / candidateData.topics.length
-    );
+    const overallScore = calculateOverallScore(candidateData);
     
     const tweetText = `${candidateData.name} has a ${overallScore}/100 science alignment score. See how your candidates align with scientific consensus at Science Scorecard! 🔬📊`;
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
@@ -1240,10 +1241,17 @@ function renderTopics(candidateData) {
         const filteredStatements = filterStatementsByDate(topic.candidateStatements, currentDateFilter);
         const statementCount = filteredStatements.length;
         
+        const scoreDisplay = topic.alignmentScore !== null && topic.alignmentScore !== undefined 
+            ? topic.alignmentScore 
+            : 'No Data';
+        const scoreColor = topic.alignmentScore !== null && topic.alignmentScore !== undefined 
+            ? getScoreColor(topic.alignmentScore)
+            : '#cccccc';
+            
         topicDiv.innerHTML = `
             <div class="topic-header">
                 <div class="topic-statement">${topic.statement}</div>
-                <div class="topic-score" style="background-color: ${getScoreColor(topic.alignmentScore)}">${topic.alignmentScore}</div>
+                <div class="topic-score" style="background-color: ${scoreColor}">${scoreDisplay}</div>
             </div>
             
             <div class="metrics">
@@ -1253,11 +1261,11 @@ function renderTopics(candidateData) {
                 </div>
                 <div class="metric">
                     <span class="metric-label">Candidate</span>
-                    <span class="metric-value">${topic.candidateMedian}%</span>
+                    <span class="metric-value">${topic.candidateMedian !== null ? topic.candidateMedian + '%' : 'No Data'}</span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">Variability</span>
-                    <span class="metric-value">±${topic.candidateVariability}%</span>
+                    <span class="metric-value">${topic.candidateVariability !== null ? '±' + topic.candidateVariability + '%' : 'N/A'}</span>
                 </div>
                 <div class="metric">
                     <span class="metric-label">Statements</span>
@@ -1272,9 +1280,13 @@ function renderTopics(candidateData) {
 }
 
 function updateOverallScore(candidateData) {
-    const overallScore = candidateData.topics.reduce((sum, topic) => sum + topic.alignmentScore, 0) / candidateData.topics.length;
-    document.getElementById('overallScore').textContent = Math.round(overallScore);
-    document.getElementById('topicCount').textContent = candidateData.topics.length;
+    const topicsWithScores = candidateData.topics.filter(topic => topic.alignmentScore !== null && topic.alignmentScore !== undefined);
+    const overallScore = topicsWithScores.length > 0 
+        ? topicsWithScores.reduce((sum, topic) => sum + topic.alignmentScore, 0) / topicsWithScores.length
+        : 0;
+    
+    document.getElementById('overallScore').textContent = topicsWithScores.length > 0 ? Math.round(overallScore) : 'N/A';
+    document.getElementById('topicCount').textContent = `${topicsWithScores.length} of ${candidateData.topics.length}`;
     
     const consistencyNote = document.getElementById('consistencyNote');
     const patternClass = getPatternClass(candidateData.overallPattern);
@@ -1373,9 +1385,7 @@ function renderBallotRaces(races) {
         
         const candidatesContainer = raceDiv.querySelector('.candidates-comparison');
         raceCandidates.forEach(candidate => {
-            const overallScore = Math.round(
-                candidate.topics.reduce((sum, topic) => sum + topic.alignmentScore, 0) / candidate.topics.length
-            );
+            const overallScore = calculateOverallScore(candidate);
             
             const candidateDiv = document.createElement('div');
             candidateDiv.className = 'candidate-card';
@@ -1412,9 +1422,10 @@ function renderBallotRaces(races) {
 }
 
 function calculateOverallScore(candidate) {
-    return Math.round(
-        candidate.topics.reduce((sum, topic) => sum + topic.alignmentScore, 0) / candidate.topics.length
-    );
+    const topicsWithScores = candidate.topics.filter(topic => topic.alignmentScore !== null && topic.alignmentScore !== undefined);
+    return topicsWithScores.length > 0 
+        ? Math.round(topicsWithScores.reduce((sum, topic) => sum + topic.alignmentScore, 0) / topicsWithScores.length)
+        : 0;
 }
 
 // Initialize application

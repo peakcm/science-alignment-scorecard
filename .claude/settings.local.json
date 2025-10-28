@@ -7,7 +7,13 @@
       "WebFetch(domain:www.politifact.com)",
       "Bash(git add:*)",
       "Bash(python:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:www.wilsonforseattle.com)",
+      "WebFetch(domain:www.fox13seattle.com)",
+      "WebFetch(domain:kingcounty.gov)",
+      "WebFetch(domain:www.electgirmay.com)",
+      "WebFetch(domain:southseattleemerald.org)",
+      "WebFetch(domain:www.claudiabalducci.com)"
     ],
     "deny": [],
     "ask": [],

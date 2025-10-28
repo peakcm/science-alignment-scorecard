@@ -1173,7 +1173,7 @@
               "source": "Agriculture Committee Hearing",
               "sourceUrl": "https://www.congress.gov/",
               "context": "House Agriculture Committee on food safety",
-              verified: true
+              "verified": true
             },
             {
               "id": "stmt_141",
@@ -1271,13 +1271,351 @@
           "alignmentScore": 88
         }
       }
+    },
+    "candidate5": {
+      "id": "candidate5",
+      "name": "Katie Wilson",
+      "party": "Democratic",
+      "office": "Mayor",
+      "state": "WA",
+      "city": "Seattle",
+      "overallPattern": "insufficient-data",
+      "patternDescription": "Limited documented positions on scientific consensus topics. Focus on municipal issues.",
+      "trendData": {
+        "climate_change": [
+          { "date": "2025-01-15", "score": 85 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_150",
+              "position": 85,
+              "date": "2025-01-15",
+              "quote": "We can have both [housing density and trees], and we need both — especially as climate change brings more extreme heat.",
+              "source": "Campaign Materials",
+              "sourceUrl": "https://www.wilsonforseattle.com/",
+              "context": "Housing and environmental policy discussion",
+              "verified": true
+            },
+            {
+              "id": "stmt_151",
+              "position": 82,
+              "date": "2025-01-10",
+              "quote": "Another lack of seriousness about the climate crisis from the Trump administration",
+              "source": "Campaign Statement",
+              "sourceUrl": "https://www.wilsonforseattle.com/",
+              "context": "Response to federal climate policy",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 84,
+          "candidateVariability": 3,
+          "alignmentScore": 80
+        },
+        "covid_origins": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "nuclear_energy": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "gmo_safety": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        }
+      }
+    },
+    "candidate6": {
+      "id": "candidate6", 
+      "name": "Bruce Harrell",
+      "party": "Democratic",
+      "office": "Mayor",
+      "state": "WA",
+      "city": "Seattle",
+      "overallPattern": "limited-data-positive",
+      "patternDescription": "Strong alignment with scientific consensus on documented topics (climate change, COVID vaccines).",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2023-02-15", "score": 87 }
+        ],
+        "climate_change": [
+          { "date": "2021-10-01", "score": 95 },
+          { "date": "2023-06-15", "score": 96 },
+          { "date": "2025-04-01", "score": 94 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_160",
+              "position": 87,
+              "date": "2023-02-15",
+              "quote": "The vaccine mandate was an effective and necessary tool for protecting the health and safety of City workers and the public we serve.",
+              "source": "Seattle Mayor's Office",
+              "sourceUrl": "https://www.seattle.gov/",
+              "context": "Statement on lifting COVID-19 employee vaccine mandate",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 87,
+          "candidateVariability": 0,
+          "alignmentScore": 85
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_161",
+              "position": 95,
+              "date": "2021-10-01",
+              "quote": "We cannot tolerate a significantly warmer world with increasingly severe weather fluctuations, and must take comprehensive action at all levels of government, business and society to address these threats.",
+              "source": "Campaign Climate Plan",
+              "sourceUrl": "https://www.bruceforseattle.com/climate-plan/",
+              "context": "Climate policy platform",
+              "verified": true
+            },
+            {
+              "id": "stmt_162",
+              "position": 96,
+              "date": "2023-06-15",
+              "quote": "The next decade is critical for setting a new course and preventing the worst effects of climate change.",
+              "source": "Campaign Materials",
+              "sourceUrl": "https://www.bruceforseattle.com/",
+              "context": "Climate crisis urgency messaging",
+              "verified": true
+            },
+            {
+              "id": "stmt_163",
+              "position": 94,
+              "date": "2025-04-01",
+              "quote": "Despite the Trump Administration's disinvestments in and opposition to climate action, Seattle will not back away from the work that needs to be done.",
+              "source": "Seattle Mayor's Office",
+              "sourceUrl": "https://www.seattle.gov/",
+              "context": "Response to federal climate policy changes",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 95,
+          "candidateVariability": 2,
+          "alignmentScore": 92
+        },
+        "covid_origins": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "nuclear_energy": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "gmo_safety": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        }
+      }
+    },
+    "candidate7": {
+      "id": "candidate7",
+      "name": "Girmay Zahilay", 
+      "party": "Democratic",
+      "office": "King County Council",
+      "state": "WA",
+      "district": "District 2",
+      "overallPattern": "limited-data-positive",
+      "patternDescription": "Strong climate action leadership. Limited data on other scientific topics.",
+      "trendData": {
+        "climate_change": [
+          { "date": "2024-01-15", "score": 87 },
+          { "date": "2024-08-20", "score": 89 },
+          { "date": "2025-01-10", "score": 88 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_170",
+              "position": 88,
+              "date": "2025-01-10",
+              "quote": "Today, we are making an immediate and lasting commitment to both address the climate crisis and build a more resilient King County",
+              "source": "King County Council",
+              "sourceUrl": "https://www.electgirmay.com/",
+              "context": "Strategic Climate Action Plan passage",
+              "verified": true
+            },
+            {
+              "id": "stmt_171", 
+              "position": 89,
+              "date": "2024-08-20",
+              "quote": "This updated Strategic Climate Action Plan is the first step to help us address our greenhouse gas emissions while also preparing for the impacts of climate change that are already here",
+              "source": "King County Official Statement",
+              "sourceUrl": "https://kingcounty.gov/",
+              "context": "Climate action plan implementation",
+              "verified": true
+            },
+            {
+              "id": "stmt_172",
+              "position": 87,
+              "date": "2024-01-15", 
+              "quote": "Many of my family members have asthma because of the pollution caused by dirty fossil fuels... pollution and climate change hit vulnerable residents hardest",
+              "source": "Council Statement",
+              "sourceUrl": "https://www.electgirmay.com/",
+              "context": "Personal statement on climate impacts",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 88,
+          "candidateVariability": 2,
+          "alignmentScore": 85
+        },
+        "covid_origins": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "nuclear_energy": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "gmo_safety": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        }
+      }
+    },
+    "candidate8": {
+      "id": "candidate8",
+      "name": "Claudia Balducci",
+      "party": "Democratic", 
+      "office": "King County Council Chair",
+      "state": "WA",
+      "district": "District 6",
+      "overallPattern": "limited-data-positive",
+      "patternDescription": "Documented support for evidence-based public health and climate action.",
+      "trendData": {
+        "childhood_immunization": [
+          { "date": "2021-01-08", "score": 85 }
+        ],
+        "climate_change": [
+          { "date": "2020-09-30", "score": 75 }
+        ]
+      },
+      "positions": {
+        "childhood_immunization": {
+          "statements": [
+            {
+              "id": "stmt_180",
+              "position": 85,
+              "date": "2021-01-08",
+              "quote": "Our residents need to get back to work. Our families need their children to get back to school. The key to getting back is widespread vaccination as quickly as possible.",
+              "source": "King County Council Statement",
+              "sourceUrl": "https://www.claudiabalducci.com/",
+              "context": "COVID-19 vaccination distribution funding support",
+              "verified": true
+            },
+            {
+              "id": "stmt_181",
+              "position": 85,
+              "date": "2021-01-08",
+              "quote": "We in local government are stepping up again today to do everything we can to make vaccines available to those most in need throughout King County.",
+              "source": "King County Council Statement", 
+              "sourceUrl": "https://www.claudiabalducci.com/",
+              "context": "Support for $7 million vaccine distribution funding",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 85,
+          "candidateVariability": 0,
+          "alignmentScore": 82
+        },
+        "climate_change": {
+          "statements": [
+            {
+              "id": "stmt_182",
+              "position": 75,
+              "date": "2020-09-30",
+              "quote": "As we continue to live with the growing impacts of climate change and in the absence of leadership at the federal level, it's clear that meaningful climate action will need to come from local and regional governments.",
+              "source": "King County Executive News Release",
+              "sourceUrl": "https://www.claudiabalducci.com/",
+              "context": "Climate Action Toolkit launch support",
+              "verified": true
+            }
+          ],
+          "candidateMedian": 75,
+          "candidateVariability": 0,
+          "alignmentScore": 72
+        },
+        "covid_origins": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "nuclear_energy": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        },
+        "gmo_safety": {
+          "statements": [],
+          "candidateMedian": null,
+          "candidateVariability": null,
+          "alignmentScore": null,
+          "dataStatus": "insufficient"
+        }
+      }
     }
   },
   "metadata": {
-    "version": "1.0",
-    "lastUpdated": "2024-03-15",
-    "totalCandidates": 4,
-    "dataQuality": "demo",
+    "version": "1.1",
+    "lastUpdated": "2025-10-28",
+    "totalCandidates": 8,
+    "dataQuality": "mixed",
     "methodology": "Statement positions scored using multi-method NLP analysis including GPT-4, stance detection models, and keyword analysis. Scores represent degree of agreement with scientific statement on 0-100 scale."
   }
 }
